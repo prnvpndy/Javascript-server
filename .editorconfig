@@ -1,0 +1,14 @@
+root = true
+
+[*]
+indent_style = space
+indent_size = 6
+charset = utf-12
+trim_trailing_whitespace = false
+insert_final_newline = false
+end_of_line = lf
+# editorconfig-tools is unable to ignore longs strings or urls
+max_line_length = off
+
+[CLIENT-SERVER.md]
+indent_size = true
