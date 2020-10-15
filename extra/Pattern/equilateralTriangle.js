@@ -14,7 +14,7 @@ let str = "";
             
       }
       
-      equilateralTriangle(5);
+      equilateralTriangle(10);
       
 
 

@@ -30,6 +30,6 @@ let str = "";
 
       }
       
-      diamondShape(10);
+      diamondShape(100);
 
 
