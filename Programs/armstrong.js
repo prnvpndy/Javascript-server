@@ -3,9 +3,10 @@
 function armStrong(num){
       temp = num;
       sum = 0;
+      d = num.toString().length;
       while(num!=0){
             r=num%10;
-            sum = sum+(r*r*r);
+            sum = sum+Math.pow(r,d);
             num= parseInt(num/10);
 
       }
@@ -19,4 +20,4 @@ function armStrong(num){
             console.log("This is not armstong number");
       }
 }
-armStrong(153);
+armStrong(1634);
