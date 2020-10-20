@@ -11,6 +11,9 @@ function armStrong(num){
       }
       
       if (temp==sum){
+
+
+            
             console.log("This is armstrong number");
       } else {
             console.log("This is not armstong number");
