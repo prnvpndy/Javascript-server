@@ -1,6 +1,6 @@
 let index = 0
 let users = [
-      { traineeEmail: 'trainee1@successive.tech'  ,
+      { traineeEmail: 'trainee1successive.tech'  ,
        reviewerEmail: 'reviewer1@successive.tech'},
       /*{ mentorEmail: 'mentor@successive'},
       { leadEmail: 'teamleadsuccessive.tech'},
@@ -18,22 +18,35 @@ function validateEmail(users){
             return false;
       }
 }
-validateEmail('prnv@successive.tech');
+//validateEmail('prnv@successive.tech');
 
 function validateUser(users){
       
-      users.forEach(({traineeEmail, reviewerEmail})=> {
-            console.log(traineeEmail, reviewerEmail);
+        
+      valid=0;
+      inValid=0;
       
-      const isValidT = validateEmail(traineeEmail);
-      const isValidR = validateEmail(reviewerEmail);
+      
+      users.forEach(({traineeEmail, reviewerEmail})=> {
+            if(validateEmail(traineeEmail)){
+                  valid++;
+            }
+            else{
+                  inValid++;
+            }
+            
+      
+      // const isValidT = validateEmail(traineeEmail);
+      // const isValidR = validateEmail(reviewerEmail);
 
 
-      }
+      });
 
      
 
       
-      }
+}
 validateUser(users);
+console.log(valid);
+console.log(inValid);
 
