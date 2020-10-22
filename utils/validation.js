@@ -34,7 +34,7 @@ let users = [
 ];
 
 //Will check her formating of emails
-let checkEmail = /^[a-zA-Z0-9._-]+@[successive]+\.[tech]{2,4}$/;
+let checkEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 let validUsers=[];
 let invalidUsers=[];
@@ -47,8 +47,8 @@ function validateEmail(email){
 //function for validate the users
 function validateUsers(users)
 {   
-    users.forEach((users)=>{
-    const {traineeEmail,reviewerEmail} = users;
+    users.forEach((user)=>{
+    const {traineeEmail,reviewerEmail} = user;
     if(validateEmail(traineeEmail) && validateEmail(reviewerEmail)){
         validUsers.push("("+traineeEmail+", "+reviewerEmail+") ");
       }

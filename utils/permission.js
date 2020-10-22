@@ -16,5 +16,5 @@ let permissions={
              console.log("false");
          }
       }
-      hasPermission(permissions.getUsers,'trainer','delete');
+      hasPermission(permissions.getUsers,'trainer','write');
   
