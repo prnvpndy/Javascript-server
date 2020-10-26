@@ -1,6 +1,6 @@
-export function equilateTriangle(noOfRows)
+export function equilateTriangle(noOfRows: number): void
 {
-let str = "";
+let str:string= "";
 
 for(let i = 1; i <=noOfRows; i++ ){
 
