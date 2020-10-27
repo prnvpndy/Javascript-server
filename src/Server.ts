@@ -15,7 +15,7 @@ class Server {
       setupRoutes(){
             const { app } = this;
             app.get('/Health-Check', (req, res, next) => {
-                  res.send('I am fine');
+                  res.send('I am Well');
             });
             return this;
       }
