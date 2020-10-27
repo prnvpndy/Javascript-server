@@ -1,35 +1,37 @@
-console.log("My First Javascript Node Project");
-
-let pattern = "";
-
-      function diamondShape(nav){
-            for(i=1;i<=nav;i++){
-                  for(j=nav-1;j>=i;j--){
-                        pattern=pattern.concat(" ");
-                  }
-                  for(k=1;k<=i;k++){
-                        pattern=pattern.concat("* ");
-                  }
-                  pattern=pattern.concat("\n");
-            }
-            
-            
-            if(i==nav+1){
-                  for(i=1;i<=nav-1;i++){
-                     for(s=1;s<=i;s++){
-                        pattern=pattern.concat(" ");
-                     }
-                     for(j=i;j<=nav-1;j++){
-                        pattern=pattern.concat("* ");
-                     }
-                     pattern=pattern.concat("\n");
-                     } 
-               }
-               
-               console.log(pattern); 
-
-      }
-      
-      diamondShape(100);
-
-
+export function diamondpattern(rows)
+{
+let s1="",s2="";
+for(let i=1;i<=rows;i++)
+{
+for(let j=1;j<=rows-i;j++)
+{
+s1+=" ";
+}
+for(let k=1;k<=i;k++)
+{
+s2+="* ";
+}
+console.log(s1,s2);
+s1="";
+s2="";
+}
+for(let i=rows;i>=1;i--)
+{
+for(let j=1;j<=rows-i;j++)
+{
+s1+=" ";
+}
+for(let k=1;k<=i;k++)
+{
+s2+="* ";
+}
+console.log(s1,s2);
+s1="";
+s2="";
+}
+}
+/*for(let i=2;i<=10;i++)
+{
+    diamondpattern(i);
+}*/
+//diamondpattern(5);
