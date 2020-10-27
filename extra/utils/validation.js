@@ -54,6 +54,7 @@ function validateUsers(users)
       }
       else{
           invalidUsers.push("("+traineeEmail+", "+reviewerEmail+") ");
+          
       }
 
 });
