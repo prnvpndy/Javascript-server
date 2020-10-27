@@ -1,5 +1,5 @@
-import {diamondpattern} from "./Diamond"
-import{equilateTriangle} from "./equilateralTriangle"
+import {diamondpattern} from "./diamond";
+import {equilateTriangle} from "./equilateralTriangle";
 
-export{diamondpattern}
-export{equilateTriangle}
+export {diamondpattern}
+export {equilateTriangle}

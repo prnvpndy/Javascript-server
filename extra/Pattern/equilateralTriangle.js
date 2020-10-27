@@ -1,3 +1,4 @@
+
 export function equilateTriangle(noOfRows)
 {
 let str = "";
