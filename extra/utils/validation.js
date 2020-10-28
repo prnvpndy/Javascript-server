@@ -1,29 +1,73 @@
-let valid_users=[],invalid_users=[];
-// define a function validateUsers for validate the email.
+let users = [
+      {
+            traineeEmail: "prnv@successive.tech",
+            reviewerEmail: "pandey@successive.tech"
+      },
+      {
+            traineeEmail: "prnv@successive.tech*1",
+            reviewerEmail: "pandey@successive.tech"
+      },
+      {
+            traineeEmail: "prnv@successive.tech",
+            reviewerEmail: "pandey@successive.tech"
+      },
+      {
+            traineeEmail: "prnv@successive.tech",
+            reviewerEmail: "pandey@successive.tech"
+      },
+      {
+            traineeEmail: "prnv@successive.te/",
+            reviewerEmail: "pandey@successive.tech//*"
+      },
+      {
+            traineeEmail: "prnv@successive.te/*",
+            reviewerEmail: "pandey@successive.t"
+      },
+      {
+            traineeEmail: "prnv@successive.tech",
+            reviewerEmail: "pandey@successive.tech"
+      },
+      {
+            traineeEmail: "prnv@successive.tech98",
+            reviewerEmail: "pandey@successive.tech"
+      }
+];
+
+//Will check her formating of emails
+let checkEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+let validUsers=[];
+let invalidUsers=[];
+
+// function for validate the email.
+function validateEmail(email){
+      return checkEmail.test(String(email).toLowerCase());
+}
+
+//function for validate the users
 function validateUsers(users)
 {   
-    users.forEach((users)=>{
-    const {traineeEmail,reviewerEmail} = users;
+    users.forEach((user)=>{
+    const {traineeEmail,reviewerEmail} = user;
     if(validateEmail(traineeEmail) && validateEmail(reviewerEmail)){
-        valid_users.push("("+traineeEmail+", "+reviewerEmail+") ");
+        validUsers.push("("+traineeEmail+", "+reviewerEmail+") ");
       }
       else{
-          invalid_users.push("("+traineeEmail+", "+reviewerEmail+") ");
+          invalidUsers.push("("+traineeEmail+", "+reviewerEmail+") ");
+          
       }
+
 });
-let validlen=valid_users.length;
-console.log("Total valid users:",validlen);
-console.log("The users are: ",valid_users);
-let invalidlen=invalid_users.length;
-console.log('Total invalid users',invalidlen);
-console.log('The users is: ',invalid_users);
+
+//It will findout the valid users
+let validEmailLength=validUsers.length;
+console.log("Total valid users:",validEmailLength);
+console.log("The users are: ",validUsers);
+
+//It will findout who are invalid users
+let invalidEmailLength=invalidUsers.length;
+console.log('Total invalid users',validEmailLength);
+console.log('The users is : ',invalidUsers);
 }
-//validateUsers(users);
 
-
-//import function validateEmail from helpers.js file.
-import{validateEmail} from './helpers.js';
-
-// export the functions validateUsers and validateEmail
-export{validateUsers};
-export {validateEmail};
+validateUsers(users);
