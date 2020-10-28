@@ -1,6 +1,6 @@
-export function diamondpattern(rows)
+export function diamondpattern(rows: number): void
 {
-let s1="",s2="";
+let s1:string="",s2: string="";
 for(let i=1;i<=rows;i++)
 {
 for(let j=1;j<=rows-i;j++)

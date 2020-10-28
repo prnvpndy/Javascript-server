@@ -1,6 +1,6 @@
-export function equilateTriangle(noOfRows)
+export function equilateTriangle(noOfRows: number): void
 {
-let str = "";
+let str:string= "";
 
 for(let i = 1; i <=noOfRows; i++ ){
 
@@ -24,4 +24,3 @@ for(let i=2;i<=10;i++)
 {
     equilateTriangle(i);
 }*/
-//# sourceMappingURL=equilateralTriangle.js.map

@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 dist/
 node_modules/
 package-lock.json
+=======
+node_modules
+package-lock.json
+dist
+>>>>>>> 3308f0f15a30c6b429e56b44e45f51ba1fce6fee
