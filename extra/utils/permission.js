@@ -18,3 +18,4 @@ let permissions={
       }
       hasPermission(permissions.getUsers,'trainer','write');
   
+export {hasPermission};
