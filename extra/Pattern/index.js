@@ -1,5 +1,5 @@
-import {diamondpattern} from "./Diamond.js"
-import{equilateTriangle} from "./equilateralTriangle.js"
+import {diamondpattern} from "./diamond";
+import {equilateTriangle} from "./equilateralTriangle";
 
-export{diamondpattern}
-export{equilateTriangle}
+export {diamondpattern}
+export {equilateTriangle}
