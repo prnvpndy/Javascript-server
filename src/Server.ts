@@ -1,35 +1,50 @@
+// create a class and define methods according to the ticket#39522
 import * as express from 'express';
+import * as bodyParser from 'body-parser';
+import { notFoundHandler, errorHandler } from './libs/routes';
+import notFoundRoute from "./libs/routes/notFoundRoute";
 
+import routes from './router';
 class Server {
-      app
-      constructor(private config){
-            this.app = express()
+    app
+    constructor(private config) {
+        this.app = express()
+    }
+    bootstrap() {
+        this.setupRoutes();
+        this.initBodyParser();
+        return this;
+    }
+    setupRoutes() {
+        const { app } = this;
 
-      }
+        app.use ((req, res, next) => {
+            console.log('Inside First MidleWare');
+            next()
+        });
 
-      bootstrap(){
-            this.setupRoutes()
-            return this;
+        app.use('/health-check', (req, res) => {
+            console.log('Inside Second MidleWare');
+            res.send('I am fine');
+        });
 
-      }
-      setupRoutes(){
-            const { app } = this;
-            app.get('/Health-Check', (req, res, next) => {
-                  res.send('I am Well');
-            });
-            return this;
-      }
-      run(){
-            const { app, config: { port } } = this;
-            app.listen(9000, (err) => {
-                  if(err){
-                        console.log(err);
-                  }
-                  console.log('App is running ${port}');
-            })
+        app.use('/api', routes);
+        app.use(notFoundHandler);
+        app.use(errorHandler);
 
-      }
-
+        return this;
+    }
+    initBodyParser() {
+        this.app.use(bodyParser.json({ type: 'application/*+json' }))
+    }
+    run() {
+        const { app, config: { PORT } } = this;
+        app.listen(PORT, (err) => {
+            if (err) {
+                console.log(err);
+            }
+            console.log(`App is running on port ${PORT}`);
+        })
+    }
 }
-
 export default Server;

@@ -34,4 +34,4 @@ s2="";
 {
     diamondpattern(i);
 }*/
-diamondpattern(5);
+//diamondpattern(5);
