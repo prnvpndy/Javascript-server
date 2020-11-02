@@ -59,7 +59,7 @@ exports.default = (config) => (req, res, next) => {
             }
         }
         if (obj.number) {
-            if (isNaN(values[0]) || values[0] === '' || values[0] === undefined) {
+            if (!isNaN(values[0]) || values[0] === '' || values[0] === undefined) {
                 errors.push({
                     message: `${key}  must be an number`,
                     status: 400,
