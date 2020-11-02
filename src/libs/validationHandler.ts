@@ -1,7 +1,8 @@
-import {query } from 'express';
-import { isNullOrUndefined } from 'util';
+// import {query } from 'express';
+// import { isNullOrUndefined } from 'util';
+import {Request, Response, NextFunction} from 'express'
 
-export default ( config ) => ( req, res, next ) => {
+export default ( config ) => ( req:Request, res:Response, next:NextFunction ) => {
       let errors = [];
       console.log( 'Inside ValidationHandler Middleware' );
       console.log( req.body );
