@@ -1,3 +1,17 @@
+// const config ={
+//       create: {
+//             id: {
+//                   required:true,
+//                   string: true,
+//                   in: ['body'],
+//                   custom: function (value){
+//                         console.log
+//                   }
+//             }
+//       }
+// }
+
+
 const config = { 
       create: 
       { 
