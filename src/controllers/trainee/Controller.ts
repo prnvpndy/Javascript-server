@@ -23,7 +23,7 @@ class traineeController {
                               }
                         ]
                   });
-            }catch(err){ 
+            }catch(err){
                   console.log("Inside err", err);
             }
       }

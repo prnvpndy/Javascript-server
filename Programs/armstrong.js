@@ -21,4 +21,3 @@ function armStrong(num){
       }
 }
 armStrong(1634);
-

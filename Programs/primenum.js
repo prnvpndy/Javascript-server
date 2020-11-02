@@ -24,4 +24,3 @@ function primeNumber(num){
       }
   }
   primeNumber(7);
-  

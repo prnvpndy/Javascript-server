@@ -1,5 +1,5 @@
 export function equilateTriangle(noOfRows)
-{ 
+{
 let str = "";
 
 for(let i = 1; i <=noOfRows; i++ ){

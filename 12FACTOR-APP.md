@@ -13,7 +13,7 @@ the ideal way to manage your application as whole.
     
     2) Dependencies:    Our application might rely on external libraries and packages to run. We should never assume that these packages 
                         exist on the target system. Instead, our application must declare all dependencies and their correct version 
-                        explicitly.   
+                        explicitly.  
 
     3) Configuration:   Configuration options should never be hardcoded, for two reasons:
 

@@ -8,4 +8,3 @@ function factorial(num)
   }
   
   factorial(50);
-  

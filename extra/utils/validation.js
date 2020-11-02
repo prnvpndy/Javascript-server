@@ -1,4 +1,4 @@
-let valid_users=[],invalid_users=[]; 
+let valid_users=[],invalid_users=[];
 // define a function validateUsers for validate the email.
 function validateUsers(users)
 {   

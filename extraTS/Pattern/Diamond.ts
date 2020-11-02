@@ -30,7 +30,6 @@ s1="";
 s2="";
 }
 }
-
 /*for(let i=2;i<=10;i++)
 {
     diamondpattern(i);

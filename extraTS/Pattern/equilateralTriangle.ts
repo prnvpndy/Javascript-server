@@ -19,7 +19,6 @@ for(let i = 1; i <=noOfRows; i++ ){
     console.log(str);
 }
 
-
 /*
 for(let i=2;i<=10;i++)
 {

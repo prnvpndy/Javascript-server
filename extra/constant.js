@@ -14,4 +14,3 @@ const permissions={
           }
   };
   export {permissions};
-  

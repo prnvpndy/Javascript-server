@@ -1,5 +1,5 @@
 // import the function of diamondpattern and equilateTriangle from patterns/index
-import {diamondpattern, equilateTriangle} from './pattern/index.js'; 
+import {diamondpattern, equilateTriangle} from './pattern/index.js';
 
 // calling the function and pass the arguments
 diamondpattern(5);

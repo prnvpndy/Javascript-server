@@ -13,4 +13,3 @@ export default (err, req: Request, res: Response, next: NextFunction) => {
 
   })
 }
-
