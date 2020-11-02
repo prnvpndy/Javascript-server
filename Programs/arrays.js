@@ -24,3 +24,4 @@ fianlValue = [bills[0] + tips[0],
 
 console.log(tips,fianlValue);
 
+

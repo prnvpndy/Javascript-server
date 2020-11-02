@@ -19,7 +19,7 @@ the server. Once the TCP connection is established, the client sends a HTTP requ
     Suppose you want to read the morning newspaper. In order to retrieve it, you write down what you need in a language called HTTP and ask 
     your local mail delivery staff agent to retrieve it from a specific business. The mail delivery person agrees and builds a railroad track 
     (connection) between your house and the business nearly instantly, and rides the train car labeled “TCP” to the address of the business 
-    you provided.
+    you provided. 
 
     The mail delivery person is able to retrieve it from the business. You can now read your newspaper in peace until you decide you want to 
     read the next page, at which point, you would make another request and give it to the mail delivery person.

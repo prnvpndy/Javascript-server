@@ -3,3 +3,4 @@ import{equilateTriangle} from "./equilateralTriangle"
 
 export{diamondpattern}
 export{equilateTriangle}
+

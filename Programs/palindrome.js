@@ -12,4 +12,4 @@ function palindrome(num){
             console.log("Number is not Palindrome");
       }
 }
-palindrome(151)
+palindrome(151);

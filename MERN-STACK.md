@@ -1,6 +1,6 @@
 MERN is full-stack, following the traditional 3-tier architectural pattern, including the front-end display tier (React.js), application tier (Express.js and Node.js), and database tier(MongoDB)
 
-MERN STACK :    Mearn Stack is stand for Mango DB, Express.js, React.js & Node.js 
+MERN STACK :    Mearn Stack is stand for Mango DB, Express.js, React.js & Node.js  
 
                 Mango DB: Document Database
                 Express(.js): Node.js framework

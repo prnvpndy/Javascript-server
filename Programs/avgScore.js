@@ -15,6 +15,6 @@ if (scoreJoe>scoreStiffy && scoreJoe>scoreMarry){
       console.log("Mike \'s teams wins with" + scoreMarry + "points");
 }
 else {
-      console.log("Match is draw");
+      console.log("Match is draw"); 
 }
       

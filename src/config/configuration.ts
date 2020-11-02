@@ -9,4 +9,5 @@ console.log("Inside config");
 
 const config = {}
 
+
 export default config;

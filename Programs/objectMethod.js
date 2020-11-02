@@ -17,7 +17,7 @@ Stiffy = {
       height: 1.72,
       totalBMI: function(){
             this.BMI = this.mass / (this.height * this.height);
-            return this.BMI;
+            return this.BMI; 
       }
 
 }
