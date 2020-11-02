@@ -14,4 +14,3 @@ traineeRouter.route('/')
       .delete(traineeController.delete)
 
 export default traineeRouter;  
-

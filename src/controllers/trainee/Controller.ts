@@ -28,6 +28,7 @@ class traineeController {
             }
       } 
 
+      
       create (req, res, next){
             try{
                   console.log('Inside post method of trainee controller');
