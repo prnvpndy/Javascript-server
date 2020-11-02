@@ -1,0 +1,16 @@
+-------------------- Auto-Git Log --------------------
+		Mon Nov 02 2020 14:10:55 GMT+0530 (India Standard Time)
+------------------------------------------------------
+
+Modified files:
+* dist/controllers/trainee/Controller.js.map
+* dist/controllers/trainee/validation.js.map
+
+
+Created files:
+
+
+Deleted files:
+
+
+Renamed files:
