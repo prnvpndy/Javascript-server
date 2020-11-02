@@ -1,7 +1,7 @@
 import {query } from 'express';
 import { isNullOrUndefined } from 'util';
 
-export default ( config ) => ( req: Request, res: Response, next: NextFunction  ) => {
+export default ( config ) => ( req, res, next ) => {
       let errors = [];
       console.log( 'Inside ValidationHandler Middleware' );
       console.log( req.body );
@@ -65,7 +65,7 @@ export default ( config ) => ( req: Request, res: Response, next: NextFunction  
               }
           }
           if (obj.number) {
-              if (!isNaN(values[0]) || values[0] === '' || values[0] === undefined) {
+              if (isNaN(values[0]) || values[0] === '' || values[0] === undefined) {
                   errors.push({
                       message: `${key}  must be an number` ,
                       status: 400,
