@@ -12,14 +12,14 @@ const config = {
                   }
              } 
             }, 
-            name: { 
+            name: {  
                   required: true, 
                   regex: '', 
                   in: ['body'], 
                   errorMessage: 'Name is required', 
             } 
       }, 
-      delete: { 
+      delete: {  
             id: { 
                   required: true, 
                   errorMessage: 'Id is required', 

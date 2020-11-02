@@ -13,4 +13,4 @@ traineeRouter.route('/')
       .put(traineeController.update)
       .delete(traineeController.delete)
 
-export default traineeRouter;
+export default traineeRouter;  
