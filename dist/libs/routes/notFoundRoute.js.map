@@ -1,1 +1,1 @@
-{"version":3,"file":"notFoundRoute.js","sourceRoot":"","sources":["../../../src/libs/routes/notFoundRoute.ts"],"names":[],"mappings":";;AAEA,kBAAe,CAAC,GAAW,EAAE,GAAY,EAAE,IAAiB,EAAC,EAAE;IACzD,OAAO,IAAI,CAAC;QACN,KAAK,EAAC,WAAW;QACjB,IAAI,EAAC,GAAG;KACb,CAAC,CAAA;AAER,CAAC,CAAA"}
+{"version":3,"file":"notFoundRoute.js","sourceRoot":"","sources":["../../../src/libs/routes/notFoundRoute.ts"],"names":[],"mappings":";;AAGA,kBAAe,CAAC,GAAY,EAAE,GAAa,EAAE,IAAkB,EAAE,EAAE;IAC/D,IAAI,CAAC;QACD,KAAK,EAAE,WAAW;QAClB,IAAI,EAAE,GAAG;KACZ,CAAC,CAAA;AAEN,CAAC,CAAA"}
