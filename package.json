@@ -21,7 +21,7 @@
     "extra": "babel-node extra",
     "start:extraTs": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
     "start": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
-    "nodemon": "nodemon ./dist/index.js"
+    "nodemon": "nodemon ./dist/src/index.js"
   },
   "repository": {
     "type": "git",
