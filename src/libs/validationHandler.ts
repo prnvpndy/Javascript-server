@@ -1,80 +1,83 @@
-
-
-
-import {Request, Response, NextFunction} from 'express';
-
-export default ( config ) => ( req:Request, res:Response, next:NextFunction ) => {
-      let errors = [];
+export default ( config ) => ( req, res, next  ) => {
+      const errors = [];
       console.log( 'Inside ValidationHandler Middleware' );
-      console.log( req.body );
-      console.log( req.query );
-      
-      console.log(Object.keys( req.query ).length );
-      
+      // console.log( req.body );
+      // console.log( req.query );
+      // console.log(Object.keys( req.query ).length );
       const keys = Object.keys( config );
-      keys.forEach((key) => { 
+      keys.forEach((key) => {
           const obj = config[key];
           console.log('key is' , key);
           const values = obj.in.map( ( val ) => {
-              // console.log( 'val',val );
-              // console.log( 'key', key );
               return req[ val ][ key ];
           });
-  
           // Checking for In i.e Body or Query
-          
-          if(isNull(req[obj.in])){
+          if (Object.keys( req[obj.in] ).length === 0) {
               errors.push({
-                  message: `Values should be passed through ${obj.in}`,
-                  status: 400
-              })
+                  key: {key},
+                  location: obj.in,
+                  message: obj.errorMessage || `Values should be passed through ${obj.in}`,
+              });
           }
-  
           // Checking for required
-          console.log('values is' ,values)
-          // console.log( 'values exist' , isNull( values ) );
-          if(obj.required){
-              if(isNull(values)){
+          console.log('values is' , values);
+          if (obj.required) {
+              if (isNull(values[0])) {
                   errors.push({
-                      message: `${key} is required`,
-                      status: 404
-                  })
+                      key: {key},
+                      location: obj.in,
+                      message: obj.errorMessage || `${key} is required`,
+                  });
               }
           }
-          if(obj.string){
-              if( ! ( typeof ( values ) === 'string' ) ) {
+          // Checking for string
+          if (obj.string) {
+              if ( !( typeof ( values[0] ) === 'string' ) ) {
                   errors.push({
-                      message: `${key} Should be a String`,
-                      status: 404
-                  })
+                      key: {key},
+                      location: obj.in,
+                      message: obj.errorMessage || `${key} Should be a String`,
+                  });
               }
           }
-          if(obj.isObject){
-              if( ! ( typeof ( values ) == 'object' ) ) {
+          // Checking for object
+          if (obj.isObject) {
+              if ( !( typeof ( values ) === 'object' ) ) {
                   errors.push({
-                      message: `${key} Should be an object`,
-                      status: 404
-                  })
+                      key: {key},
+                      location: obj.in,
+                      message: obj.errorMessage || `${key} Should be an object`,
+                  });
               }
           }
+          // Checking for regex
           if (obj.regex) {
               const regex = obj.regex;
               if (!regex.test(values[0])) {
                   errors.push({
-                      message: `${key} is not valid expression` ,
-                      status: 400,
+                      key: {key},
+                      location: obj.in,
+                      message: obj.errorMessage || `${key} is not valid expression` ,
                   });
               }
           }
+          // Checking for default
+          if (obj.default) {
+              if (isNull(values[0])) {
+                  values[0] === obj.default;
+              }
+          }
+          // Checking for number
           if (obj.number) {
-              if (!isNaN(values[0]) || values[0] === '' || values[0] === undefined) {
+              if (isNaN(values[0]) || values[0] === undefined) {
                   errors.push({
-                      message: `${key}  must be an number` ,
-                      status: 400,
+                      key: {key},
+                      location: obj.in,
+                      message: obj.errorMessage || `${key}  must be an number` ,
                   });
               }
           }
-      })
+      });
       if (errors.length > 0) {
           res.status(400).send({ errors});
       }
@@ -83,54 +86,9 @@ export default ( config ) => ( req:Request, res:Response, next:NextFunction ) =>
       }
   };
   
-  function isNull( obj: any ) {
-      // console.log('obj[0',obj[0]);
-      const a = ( obj == "undefined" || obj === null );
-      // console.log('result' , a);
+  
+  
+  function isNull( obj ) {
+      const a = ( obj === undefined || obj === null );
       return a;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// export default (config) => (req, res, next) =>{
-//       console.log("config",config);
-//       console.log(req.query);
-//       //console.log(req.body);
-
-      
-
-//       next();
-// }
-
-// const error = [
-//       {              
-//             key: "skip",      
-//             location: "query",      
-//             errorMessage: "Skip is invalid"      
-//       },      
-//       {      
-//             key: "limit",      
-//             location: "query",
-//             errorMessage: "Limit is invalid"
-//       }       
-// ]
