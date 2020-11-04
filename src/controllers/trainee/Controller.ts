@@ -26,8 +26,9 @@ class traineeController {
             }catch(err){
                   console.log("Inside err", err);
             }
-      }
+      } 
 
+      
       create (req, res, next){
             try{
                   console.log('Inside post method of trainee controller');

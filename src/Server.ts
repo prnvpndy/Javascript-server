@@ -26,7 +26,7 @@ class Server {
         app.use('/health-check', (req, res) => {
             console.log('Inside Second MidleWare');
             res.send('I am fine');
-        });
+        }); 
 
         app.use('/api', routes);
         app.use(notFoundHandler);
