@@ -1,6 +1,6 @@
 import * as jwt from 'jsonwebtoken'
-import { hasPermission } from '../../../extraTs/utils/index';
-import { permissions } from '../../../extraTs/constant'
+import { hasPermission } from '../permission';
+import { permissions } from '../constant'
 export default (module, permissionType) => (req, res, next) => {
       try {
             console.log("The config is: ", module, permissionType);
