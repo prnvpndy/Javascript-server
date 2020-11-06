@@ -1,86 +1,77 @@
-class traineeController {
-      static instance: traineeController
+class TraineeController {
+      static instance: TraineeController;
 
-      static getInstance(){
-            if(traineeController.instance) {
-                  return traineeController.instance
+      static getInstance() {
+            if (TraineeController.instance) {
+                  return TraineeController.instance;
             }
-            
-            traineeController.instance = new traineeController();
-            return traineeController.instance;
+            TraineeController.instance = new TraineeController();
+            return TraineeController.instance;
       }
-       
-      get (req, res, next){
-            try{
+      get (req, res, next) {
+            try {
                   console.log('Inside get method of trainee controller');
 
-                  res.send({
+                  res.send( {
                         message: 'Trainee fetched successfully',
-                        data:[
+                        data: [
                               {
-                                    name:'Trainee1',
+                                    name: 'Trainee1',
                                     address: 'Delhi, IN'
                               }
                         ]
                   });
-            }catch(err){
-                  console.log("Inside err", err);
-            }
-      } 
-
-      
-      create (req, res, next){
-            try{
-                  console.log('Inside post method of trainee controller');
-
-                  res.send({
-                        message: 'Trainee created successfully',
-                        data:[
-                              {
-                                    name:'Trainee1',
-                                    address: 'Delhi, IN'
-                              }
-                        ]
-                  });
-            }catch(err){
-                  console.log("Inside err", err);
+            } catch (err) {
+                  console.log('Inside err', err);
             }
       }
-
-      update (req, res, next){
-            try{
+      create (req, res, next) {
+            try {
+                  console.log('Inside post method of trainee controller');
+                  res.send( {
+                        message: 'Trainee created successfully',
+                        data: [
+                              {
+                                    name: 'Trainee1',
+                                    address: 'Delhi, IN'
+                              }
+                        ]
+                  });
+            } catch (err) {
+                  console.log('Inside err', err);
+            }
+      }
+      update(req, res, next) {
+            try {
                   console.log('Inside update method of trainee controller');
-
                   res.send({
                         message: 'Trainee updated successfully',
-                        data:[
+                        data: [
                               {
-                                    name:'Trainee1',
+                                    name: 'Trainee1',
                                     address: 'Delhi, IN'
                               }
                         ]
                   });
-            }catch(err){
-                  console.log("Inside err", err);
+            } catch (err) {
+                  console.log('Inside err', err);
             }
       }
-      delete (req, res, next){
-            try{
+      delete (req, res, next) {
+            try {
                   console.log('Inside delete method of trainee controller');
-
-                  res.send({
+                  res.send( {
                         message: 'Trainee deleted successfully',
-                        data:[
+                        data: [
                               {
-                                    name:'Trainee1',
+                                    name: 'Trainee1',
                                     address: 'Delhi, IN'
                               }
                         ]
                   });
-            }catch(err){
-                  console.log("Inside err", err);
-            } 
+            } catch (err) {
+                  console.log('Inside err', err);
+            }
       }
 }
-
-export default traineeController.getInstance()
+export default TraineeController.getInstance();

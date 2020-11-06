@@ -1,86 +1,77 @@
-class userController {
-    static instance: userController
+class UserController {
+    static instance: UserController;
 
-    static getInstance(){
-          if(userController.instance) {
-                return userController.instance
+    static getInstance() {
+          if (UserController.instance) {
+                return UserController.instance;
           }
-          
-          userController.instance = new userController();
-          return userController.instance;
+          UserController.instance = new UserController();
+          return UserController.instance;
     }
-     
-    get (req, res, next){
-          try{
+    get (req, res, next) {
+          try {
                 console.log('Inside get method of user controller');
-
-                res.send({
+                res.send( {
                       message: 'User fetched successfully',
-                      data:[
+                      data: [
                             {
-                                  name:'User1',
+                                  name: 'User1',
                                   address: 'Delhi, IN'
                             }
                       ]
                 });
-          }catch(err){
-                console.log("Inside err", err);
+          } catch (err) {
+                console.log('Inside err', err);
           }
-    } 
-
-    
-    create (req, res, next){
-          try{
+    }
+    create (req, res, next) {
+          try {
                 console.log('Inside post method of user controller');
-
-                res.send({
+                res.send( {
                       message: 'User created successfully',
-                      data:[
+                      data: [
                             {
-                                  name:'User',
+                                  name: 'User',
                                   address: 'Delhi, IN'
                             }
                       ]
                 });
-          }catch(err){
-                console.log("Inside err", err);
+          } catch (err) {
+                console.log('Inside err', err);
           }
     }
-
-    update (req, res, next){
-          try{
+    update (req, res, next) {
+          try {
                 console.log('Inside update method of user controller');
-
-                res.send({
+                res.send( {
                       message: 'User updated successfully',
-                      data:[
+                      data: [
                             {
-                                  name:'User1',
+                                  name: 'User1',
                                   address: 'Delhi, IN'
                             }
                       ]
                 });
-          }catch(err){
-                console.log("Inside err", err);
+          } catch (err) {
+                console.log('Inside err', err);
           }
     }
-    delete (req, res, next){
-          try{
+    delete (req, res, next) {
+          try {
                 console.log('Inside delete method of User controller');
-
-                res.send({
+                res.send( {
                       message: 'User deleted successfully',
-                      data:[
+                      data: [
                             {
-                                  name:'User1',
+                                  name: 'User1',
                                   address: 'Delhi, IN'
                             }
                       ]
                 });
-          }catch(err){
-                console.log("Inside err", err);
-          } 
+          } catch (err) {
+                console.log('Inside err', err);
+          }
     }
 }
 
-export default userController.getInstance()
+export default UserController.getInstance();

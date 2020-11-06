@@ -1,5 +1,5 @@
 // all the constant values in above file.
-const permissions: Ipermission={
+const permissions: Ipermission = {
       'getUsers': {
       all: ['head-trainer'],
       read : ['trainee', 'trainer'],
@@ -13,5 +13,5 @@ const permissions: Ipermission={
           delete: [],
           }
   };
-  import { Ipermission } from "./interfaces";
-  export {permissions};
+  import { Ipermission } from './interfaces';
+  export { permissions };

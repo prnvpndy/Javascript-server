@@ -11,5 +11,5 @@ export default (err, req: Request, res: Response, next: NextFunction) => {
     message: err.message || 'Error',
     timestamp: new Date()
 
-  })
-}
+  });
+};
