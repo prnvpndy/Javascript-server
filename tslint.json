@@ -1,4 +1,5 @@
 {
+    "no-require-imports": false,
 
     "defaultSeverity": "error",
     
@@ -41,6 +42,8 @@
     "check-whitespace"
     
     ],
+    
+    "no-var-requires": false,
     
     "no-var-keyword": true,
     

@@ -4,8 +4,8 @@ import { permissions } from '../constant';
 export default (module, permissionType) => (req, res, next) => {
       try {
             console.log('The config is:', module, permissionType);
-            console.log('Header is:', req.headers[ 'authorization' ]);
-            const token = req.headers['authorization'];
+            console.log('Header is:', req.headers.authorization);
+            const token = req.headers.authorization;
             const decodeUser = jwt.verify(token, 'qwertyuiopasdfghjklzxcvbnm123456');
             console.log('user', decodeUser);
             const nav = decodeUser.Role;
