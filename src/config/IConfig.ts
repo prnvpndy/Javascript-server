@@ -1,6 +1,6 @@
 interface Iconfig {
     PORT: string;
-    NODE_ENV: string;
-    MONGO_URL: string;
+    nodeEnv: string;
+    mongoUrl: string;
 }
 export default Iconfig;

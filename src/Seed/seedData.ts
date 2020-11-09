@@ -1,4 +1,6 @@
 import UserRepository from '../repositories/user/UserRepository';
+import user1 from '../Seed/mock';
+import user2 from '../Seed/mock';
 
 const userRepo: UserRepository = new UserRepository();
 export default () => {
@@ -6,8 +8,8 @@ export default () => {
     .then(res => {
         if (res === 0) {
             console.log('data seeding in progress');
-            userRepo.create({name: 'Head Trainer', role: 'head-trainer', email: 'headtrainer@successive.tech'});
-            userRepo.create({name: 'Trainee', role: 'trainee', email: 'trainee@successive.tech'});
+            userRepo.create(user1);
+            userRepo.create(user2);
         }
     })
     .catch(err => console.log(err));

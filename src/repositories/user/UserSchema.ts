@@ -6,7 +6,6 @@ class UserSchema extends mongoose.Schema {
 
         const baseSchema = Object.assign({
 
-            _id: String,
             name: String,
             email: String,
             role: String,
