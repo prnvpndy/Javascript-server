@@ -1,8 +1,8 @@
 interface Iconfig
 {
-    PORT:string;
-    NODE_ENV:string;
-    MONGO_URL:string;
+    port:string;
+    nodeEnv:string;
+    mongoUrl:string;
 }
 
 

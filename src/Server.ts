@@ -41,15 +41,15 @@ class Server {
     }
     run() {
 
-const {  PORT, NODE_ENV, MONGO_URL } = this.config;
-        Database.open(MONGO_URL)
+const {  port, nodeEnv, mongoUrl } = this.config;
+        Database.open(mongoUrl)
         .then((res)=>{
             console.log("Successfully conected to Mongo");
-            this.app.listen(PORT, (err) => {
+            this.app.listen(port, (err) => {
                 if (err) {
                     console.log(err);
                 }
-                console.log(`App is running on port ${PORT}`);
+                console.log(`App is running on port ${port}`);
             })
 
         })
