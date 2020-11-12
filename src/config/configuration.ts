@@ -22,9 +22,10 @@ const envVars = require ('dotenv').config();
 // console.log("inside config" , envVars);
 const config = {
     port : envVars.parsed.PORT,
+    nodeEnv : envVars.parsed.NODE_ENV,
     mongoUrl : envVars.parsed.MONGO_URL,
-    nodeEnv : envVars.parsed.NODE_ENV
 };
+
 Object.freeze( config );
 export default config;
 /* tslint-disable */
