@@ -10,6 +10,9 @@ function hasPermission(moduleName,role,permissionType){
       else{
           console.log("false");
       }
+      //return boolean ;
+
+
    }
   /* hasPermission(permissions.getUsers,'head-trainer','all');
    hasPermission(permissions.getUsers,'head-trainer','read');
