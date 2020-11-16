@@ -1,17 +1,37 @@
 // all the constant values in above file.
-const permissions: Ipermission = {
+// import{Ipermission} from './interfaces';
+const permissions = {
       'getUsers': {
-      all: ['head-trainer'],
-      read : ['trainee', 'trainer'],
-      write : ['trainer'],
-      delete: [],
-      },
-      'getUsers1': {
           all: ['head-trainer'],
-          read : ['trainee', 'trainer'],
-          write : ['trainer'],
+          read: ['trainee', 'trainer'],
+          write: ['trainer'],
           delete: [],
-          }
+      }
   };
-  import { Ipermission } from './interfaces';
+
   export { permissions };
+
+
+
+
+
+
+
+
+// // all the constant values in above file.
+// const permissions: Ipermission = {
+//       'getUsers': {
+//       all: ['head-trainer'],
+//       read : ['trainee', 'trainer'],
+//       write : ['trainer'],
+//       delete: [],
+//       },
+//       'getUsers1': {
+//           all: ['head-trainer'],
+//           read : ['trainee', 'trainer'],
+//           write : ['trainer'],
+//           delete: [],
+//           }
+//   };
+//   import { Ipermission } from './interfaces';
+//   export { permissions };
