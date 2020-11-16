@@ -2,7 +2,7 @@
 
 
 
-// //import * as dotenv from 'dptenv';
+
 // const envVars = require('dotenv').config();
 
 // console.log("Inside config");
@@ -16,10 +16,17 @@
 // import { config } from 'dotenv';
 // config();
 import IConfig from './IConfig';
-const envVars = require ('dotenv').config()
+import dotenv from 'dotenv';
+/* tslint-disable */
+const envVars = require ('dotenv').config();
 // console.log("inside config" , envVars);
-const config = envVars.parsed;
+const config = {
+    port : envVars.parsed.PORT,
+    nodeEnv : envVars.parsed.NODE_ENV,
+    mongoUrl : envVars.parsed.MONGO_URL,
+};
+
 Object.freeze( config );
 export default config;
-
+/* tslint-disable */
 // export default configurations;

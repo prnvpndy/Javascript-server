@@ -85,9 +85,6 @@ export default ( config ) => ( req, res, next  ) => {
           next();
       }
   };
-  
-  
-  
   function isNull( obj ) {
       const a = ( obj === undefined || obj === null );
       return a;
