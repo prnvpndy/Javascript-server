@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-import { Router } from "express";
-import UserController from "./Controller";
-import validationHandler from "../../libs/validationHandler";
-import validation from "./validation";
-import authMoiddleWare from "../../libs/routes/authMiddleWare";
-
-const userRouter = Router();
-userRouter.route('/login')
-      .post(authMoiddleWare(), validationHandler(validation.create), UserController.create)
-
-export default userRouter;
-=======
 // create a routes.ts file
 import { Router } from 'express';
 import UserController from './Controller';
@@ -52,4 +39,3 @@ export default UserRouter;
 //       .put(validationHandler(validation.update), userController.update)
 //       .delete(validationHandler(validation.delete), userController.delete);
 // export default userRouter;
->>>>>>> c865f9ecbb5c9769306f210bed89ef094b198b2f
