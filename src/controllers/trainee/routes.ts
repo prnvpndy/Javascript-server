@@ -13,8 +13,4 @@ traineeRouter.route('/')
       .post(validationHandler(validation.create), TraineeController.create)
       .put(validationHandler(validation.update), TraineeController.update)
       .delete(validationHandler(validation.delete), TraineeController.delete);
-<<<<<<< HEAD
-=======
-
->>>>>>> 56c7da70885cd9c062b5e11d293ea0795f10613f
 export default traineeRouter;

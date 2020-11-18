@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-//import UserRepository from '../repositories/user/UserRepository';
-=======
 // import UserRepository from '../repositories/user/UserRepository';
->>>>>>> 56c7da70885cd9c062b5e11d293ea0795f10613f
 
 // const userRepository: UserRepository = new UserRepository();
 // export default () => {
@@ -36,13 +32,8 @@
 
 import UserRepository from '../repositories/user/UserRepository';
 import user from '../Seed/mock';
-<<<<<<< HEAD
 // import user2 from '../Seed/mock';
 
-=======
-
-
->>>>>>> 56c7da70885cd9c062b5e11d293ea0795f10613f
 const userRepo: UserRepository = new UserRepository();
 export default () => {
     userRepo.count()
