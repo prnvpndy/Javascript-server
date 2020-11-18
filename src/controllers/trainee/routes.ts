@@ -13,5 +13,5 @@ traineeRouter.route('/')
       .post(validationHandler(validation.create), TraineeController.create)
       .put(validationHandler(validation.update), TraineeController.update)
       .delete(validationHandler(validation.delete), TraineeController.delete);
-      
+
 export default traineeRouter;
