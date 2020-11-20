@@ -32,7 +32,7 @@
 
 import UserRepository from '../repositories/user/UserRepository';
 import user from '../Seed/mock';
-
+// import user2 from '../Seed/mock';
 
 const userRepo: UserRepository = new UserRepository();
 export default () => {
