@@ -2,15 +2,15 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import { notFoundHandler, errorHandler } from './libs/routes';
-import notFoundRoute from "./libs/routes/notFoundRoute";
-import Database from "./libs/Database";
+import notFoundRoute from './libs/routes/notFoundRoute';
+import Database from './libs/Database';
 import Iconfig from './config/IConfig';
 
 import routes from './router';
 class Server {
-    app
+    app;
     constructor(private config) {
-        this.app = express()
+        this.app = express();
     }
     bootstrap() {
         this.setupRoutes();
@@ -22,13 +22,13 @@ class Server {
 
         app.use ((req, res, next) => {
             console.log('Inside First MidleWare');
-            next()
+            next();
         });
 
         app.use('/health-check', (req, res) => {
             console.log('Inside Second MidleWare');
             res.send('I am fine');
-        }); 
+        });
 
         app.use('/api', routes);
         app.use(notFoundHandler);
@@ -37,7 +37,7 @@ class Server {
         return this;
     }
     initBodyParser() {
-        this.app.use(bodyParser.json({ type: 'application/*+json' }))
+        this.app.use(bodyParser.json({ type: 'application/*+json' }));
     }
     run() {
 
@@ -53,10 +53,9 @@ const {  port, nodeEnv, mongoUrl } = this.config;
             })
 
         })
-        .catch(err=>{
+        .catch ( err => {
             console.log(err);
-        })
-       
+        });
     }
 }
 export default Server;

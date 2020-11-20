@@ -1,27 +1,24 @@
 
 // create interfaces according to the instruction mention in ticket#39520
 
-interface Ipermission{
-      'getUsers':{
-   all:string[];
-   read:string[];
-   write:string[];
-   delete:[];
-  },
-  'getUsers1':{
-      all:string[];
-      read:string[];
-      write:string[];
-      delete:[];
-     }
+interface Ipermission {
+      'getUsers': {
+   all: string [];
+   read: string [];
+   write: string [];
+   delete: [];
   };
-  
-  interface Iusers{
-          traineeEmail : string;
-          reviewerEmail: string;
+  'getUsers1': {
+      all: string [];
+      read: string [];
+      write: string [];
+      delete: [];
+     };
+  }
+  interface Iusers {
       
-  
-  };
-  export{Ipermission};
-  
-  export{Iusers};
+          traineeEmail: string;
+          reviewerEmail: string;
+      }
+  export { Ipermission };
+  export { Iusers };
