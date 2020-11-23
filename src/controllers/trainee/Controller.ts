@@ -69,53 +69,29 @@ class TraineeController {
         }
     }
 
-    // public delete = (req, res, next) => {
-    //     try {
-    //         const id = req.params.id;
-    //         const userData = userModel.findOne({ originalId: id })
-    //         userModel.findOne({ originalId: id })
-    //         console.log(id, "hhhhh")
-    //         const remover = '5fb3663da080091a8c21d58b';
-    //         console.log(remover, " remover")
-    //         const user = new UserRepository();
-    //         user.deleteData(id, remover)
-    //             .then((result) => {
-    //                 res.send({
-    //                     message: 'Deleted successfully', result,
-    //                     code: 200,
-    //                     data: result
-    //                 });
-    //             })
-    //     }
-    delete = (req: Request, res: Response, next: NextFunction) => {
-
+    public delete = (req, res, next) => {
         try {
-        const { id } = req.query;
-        console.log(id);
-        userModel.findOne({ originalId: id }, (err, result1) => {
-        if (result1 !== undefined) {
-        this.userRepository.deleteData(id, result1.id)
-        .then((result) => {
-        console.log('Data deleted successfully');
-        res.status(200).send({ message: 'Data Deleted successfully', data: result });
-        });
-        }
-        else {
-        console.log('User not found to be deleted');
-        res.send({
-        message: 'User not found to be deleted',
-        code: 404
-        });
-        }
-        });
+            const id = req.params.id;
+            const userData = userModel.findOne({ originalId: id })
+            userModel.findOne({ originalId: id })
+            console.log(id, "hhhhh")
+            const remover = '5fb3663da080091a8c21d58b';
+            console.log(remover, " remover")
+            const user = new UserRepository();
+            user.deleteData(id, remover)
+                .then((result) => {
+                    res.send({
+                        message: 'Deleted successfully', result,
+                        code: 200,
+                        data: result
+                    });
+                })
         }
         catch (err) {
-            res.send({
-                message: 'User not found to be deleted',
-                code: 404
-            });
+            console.log('Inside Error', err);
         };
     }
+    
 }
 export default TraineeController.getInstance();
 

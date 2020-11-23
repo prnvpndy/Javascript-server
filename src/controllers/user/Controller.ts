@@ -23,14 +23,16 @@ class UserController {
     login(req: Request, res: Response, next: NextFunction) {
        
         try {
-            console.log("sdfgdgffgd",req.body)
+            //console.log("sdfgdgffgd",req.body)
             const {email, password } = req.body;
-            console.log("dfggf",req.body);
+            //console.log("dfggf",req.body);
             userModel.findOne({ email: email }, (err, result) => {
-                if (result!=null) {
-                    if (password === result.password) {
-                        result.password = bcrypt.hashSync(result.password, 10);
-                        const token = jwt.sign({ result }, 'qwertyuiopasdfghjklzxcvbnm123456');
+                if (result) {
+                    if (bcrypt.compareSync(password,result.password)) {
+                        //result.password = bcrypt.hashSync(result.password, 10);
+                        const token = jwt.sign({ result }, config.secretKey,{
+                            expiresIn: '15m'
+                        });
                         console.log(result);
                         console.log(token);
                         res.send({

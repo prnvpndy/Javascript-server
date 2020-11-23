@@ -51,10 +51,10 @@ import authMiddleWare from "../../libs/routes/authMiddleWare";
 const UserRouter = Router();
 
 UserRouter.route('/me')
-    .get(authMiddleWare('getUser', 'read'), UserController.me);
+    .get(authMiddleWare('getUser', 'read'), validationHandler(validation.get), UserController.me);
 
 UserRouter.route('/login')
-    .post(UserController.login);
+    .post(authMiddleWare('getUser', 'read'), validationHandler(validation.get),  UserController.login);
 
 
 

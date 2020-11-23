@@ -25,7 +25,7 @@ const config = {
     nodeEnv : envVars.parsed.NODE_ENV,
     mongoUrl : envVars.parsed.MONGO_URL,
     password: envVars.parsed.password,
-    key: envVars.parsed.KEY
+    secretKey: envVars.parsed.secretKey
 };
 
 Object.freeze( config );
