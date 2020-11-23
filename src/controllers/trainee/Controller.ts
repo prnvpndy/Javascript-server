@@ -20,13 +20,30 @@ class TraineeController {
         this.delete = this.delete.bind(this);
     }
     userRepository: UserRepository = new UserRepository();
-    get = (req, res, next) => {
+    get = async(req, res, next) => {
         try {
             console.log('Inside GET method of Trianee controller ');
+            let sort: any;
+           
+            if (req.query.sort === 'email') {
+                sort = {email: req.query.sortedby };
+            }
+            else if (req.query.sort === 'name') {
+                sort = {name: req.query.sortedby };
+            } 
+            else
+            sort = { createdAt: -1 };
+            const trainee = await this.userRepository.list1(sort, req.query.skip, req.query.limit);
+            const countTrainee = await this.userRepository.count()
+            console.log('count is ' , countTrainee)
             this.userRepository.getAll()
                 .then((res1) => {
                     console.log('Response is: ', res1);
-                    res.status(200).send({ message: 'successfully fetched Trainee', data: res1 })
+                    res.status(200).send({ message: 'successfully fetched Trainee', 
+                    TotalCount: countTrainee, 
+                    TraineeCount: trainee.length,
+                    record: trainee 
+                })
                 })
         } catch (err) {
             console.log('Inside Error', err);
