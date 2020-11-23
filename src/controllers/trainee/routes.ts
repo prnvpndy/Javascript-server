@@ -9,8 +9,8 @@ import { authMiddleWare } from '../../libs/routes/';
 const traineeRouter  = Router();
 
 traineeRouter.route('/')
-      .get(authMiddleWare('getUser', 'all'), validationHandler(validation.get), TraineeController.get)
-      .post(validationHandler(validation.create), TraineeController.create)
-      .put(validationHandler(validation.update), TraineeController.update)
-      .delete(validationHandler(validation.delete), TraineeController.delete);
+      .get(authMiddleWare('getUser', 'read'), validationHandler(validation.get), TraineeController.get)
+      .post(authMiddleWare('getUser', 'read'),validationHandler(validation.create), TraineeController.create)
+      .put(authMiddleWare('getUser', 'read'),validationHandler(validation.update), TraineeController.update)
+      .delete(authMiddleWare('getUser', 'read'), validationHandler(validation.delete), TraineeController.delete);
 export default traineeRouter;

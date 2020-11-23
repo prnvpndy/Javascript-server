@@ -35,7 +35,7 @@ const config = {
             id: {
                   required: true,
                   errorMessage: 'Id is required',
-                  in: ['params'] }
+                  in: ['body'] }
             },
       get: {
             skip: {

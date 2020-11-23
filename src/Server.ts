@@ -13,8 +13,8 @@ class Server {
         this.app = express();
     }
     bootstrap() {
-        this.setupRoutes();
         this.initBodyParser();
+        this.setupRoutes();
         return this;
     }
     setupRoutes() {
@@ -37,7 +37,7 @@ class Server {
         return this;
     }
     initBodyParser() {
-        this.app.use(bodyParser.json({ type: 'application/*+json' }));
+        this.app.use(bodyParser.json());
     }
     run() {
 

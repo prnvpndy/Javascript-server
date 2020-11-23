@@ -12,7 +12,7 @@ export default (moduleName: string, permissionType: string) => (req: IRequest, r
         console.log('The config is : ', moduleName, permissionType);
         console.log('Header is ', req.headers['authorization']);
         const token = req.headers['authorization'];
-        const secret = 'qwertyuiopasdfghjklzxcvbnm123456';
+        const secret = 'qwertyuiopasdfghjklzxcvbnm123456'; //qwertyuiopasdfghjklzxcvbnm123456
         const decodeUser = jwt.verify(token, secret);
         const role = decodeUser.role;
         console.log('User', decodeUser);
