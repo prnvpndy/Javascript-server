@@ -1,4 +1,6 @@
 // create a class and define methods according to the ticket#39522
+import * as swaggerJsDoc from 'swagger-jsdoc';
+import * as swaggerUI from 'swagger-ui-express';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import { notFoundHandler, errorHandler } from './libs/routes';
@@ -17,6 +19,28 @@ class Server {
         this.setupRoutes();
         return this;
     }
+    initSwagger = () => {
+        const options = {
+            definition: {
+                info: {
+                    title: 'JavaScript-Server API Swagger',
+                    version: '1.0.0',
+                },
+                securityDefinitions: {
+                    Bearer: {
+                        type: 'apiKey',
+                        name: 'Authorization',
+                        in: 'headers'
+                    }
+                }
+            },
+            basePath: '/api',
+            swagger: '4.1',
+            apis: ['./src/controllers/**/routes.ts'],
+        };
+        const swaggerSpec = swaggerJsDoc(options);
+        return swaggerSpec;
+    }
     setupRoutes() {
         const { app } = this;
 
@@ -24,7 +48,7 @@ class Server {
             console.log('Inside First MidleWare');
             next();
         });
-
+        app.use('/swagger', swaggerUI.serve, swaggerUI.setup(this.initSwagger()));
         app.use('/health-check', (req, res) => {
             console.log('Inside Second MidleWare');
             res.send('I am fine');
