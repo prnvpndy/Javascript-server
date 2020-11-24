@@ -4,14 +4,15 @@ class UserSchema extends mongoose.Schema {
 
     constructor(collections: any) {
 
-        const baseSchema = Object.assign({
+        const baseSchema ={
 
+            _id: String,
             name: String,
             email: String,
             role: String,
             password: String,
 
-        });
+        };
 
         super (baseSchema, collections);
 

@@ -8,17 +8,20 @@ class VersionableSchema extends mongoose.Schema {
     constructor(options: any, collections: any) {
         const versionedOptions = Object.assign({
             createdAt: {
-                default: Date.now,
+                required:true,
+                default: Date.now(),
                 type: Date,
             },
-            createdBy: {
+            createdBy: { 
+                required:true,
                 type: String
             },
             updatedAt: {
-                default: Date.now,
+                required:false,
                 type: Date,
             },
             updatedBy: {
+                required:false,
                 type: String
             },
             deletedAt: {
@@ -26,6 +29,7 @@ class VersionableSchema extends mongoose.Schema {
                 type: Date,
             },
             deletedBy: {
+                required:false,
                 type: String
             },
             originalId: {

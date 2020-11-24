@@ -21,9 +21,9 @@ export default class VersioningRepository<D extends mongoose.Document, M extends
             ...options,
             _id: id,
             originalId: id,
-            createdAt: Date.now(),
             createdBy: id
         });
+        console.log('Inside original id',model);
         return await model.save();
     }
 
@@ -42,15 +42,13 @@ export default class VersioningRepository<D extends mongoose.Document, M extends
         return this.model.findOne(finalQuery);
     }
 
-    public find(query: any = {}, projection: any = {}, options: any = {}): DocumentQuery<D[], D> {
-        const finalQuery = { deleteAt: null, ...query };
-        return this.model.find(finalQuery, projection, options);
-    }
+    // public find(query: any = {}, projection: any = {}, options: any = {}): DocumentQuery<D[], D> {
+    //     const finalQuery = { deleteAt: null, ...query };
+    //     return this.model.find(finalQuery, projection, options);
+    // }
     public invalidate(id: any): DocumentQuery<D, D> {
         return this.model.update({ originalId: id, deletedAt: null }, {});
     }
-
-
 
     public async update(data: any, id: string): Promise<D> {
         let originalData;
@@ -100,7 +98,7 @@ export default class VersioningRepository<D extends mongoose.Document, M extends
                     deletedBy: remover,
                 };
 
-                this.model.updateOne({ _id: oldId }, modelDelete)
+                this.model.invalidate({ _id: oldId }, modelDelete)
                     .then((res) => {
                         if (res === null) {
                             throw '';

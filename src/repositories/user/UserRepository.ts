@@ -1,6 +1,3 @@
-// 
-
-
 import * as mongoose from 'mongoose';
 import { userModel } from './UserModel';
 import IUserModel from './IUserModel';
@@ -17,18 +14,17 @@ export default class UserRepository extends VersionableRepository<IUserModel, mo
     public findOne(query): mongoose.DocumentQuery<IUserModel, IUserModel, {}> {
         return super.findOne(query).lean();
     }
-    public find(query, projection?: any, options?: any): any {
-        return super.find(query, projection, options)
-    }
+    // public find(query, projection?: any, options?: any): any {
+    //     return super.find(query, projection, options)
+    // }
     public create(data: any): Promise<IUserModel> {
-        console.log('UserRepository:: create', data);
-        const id = UserRepository.generateObjectId();
-        const model = new userModel({
-            _id: id,
-            createdAt: Date.now,
-            originalId: id,
+        const id=UserRepository.generateObjectId();
+        const model=new userModel({
+            _id:id,
+            createdAt:Date.now(),
+            originalId:id,
             ...data,
-        });
+        })
         return model.save();
     }
     public update(id: any, data: any): Promise<IUserModel> {
@@ -44,5 +40,3 @@ export default class UserRepository extends VersionableRepository<IUserModel, mo
     }
 
 }
-
-

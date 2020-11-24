@@ -13,12 +13,12 @@ class TraineeController {
         TraineeController.instance = new TraineeController();
         return TraineeController.instance;;
     }
-    constructor() {
-        this.get = this.get.bind(this);
-        this.create = this.create.bind(this);
-        this.update = this.update.bind(this);
-        this.delete = this.delete.bind(this);
-    }
+    // constructor() {
+    //     //this.get = this.get.bind(this);
+    //     //this.create = this.create.bind(this);
+    //     this.update = this.update.bind(this);
+    //     this.delete = this.delete.bind(this);
+    // }
     userRepository: UserRepository = new UserRepository();
     get = (req, res, next) => {
         try {
@@ -34,8 +34,9 @@ class TraineeController {
     }
     create = (req, res, next) => {
         try {
+            const {role, name, email, password} = req.body;
             console.log('Inside POST method of Trianee controller ');
-            this.userRepository.create({ role: req.body.role, name: req.body.name })
+            this.userRepository.create({ role, name, email, password })
                 .then((res1) => {
                     console.log('Response is: ', res1);
                     res.status(200).send({ message: 'Trainee created successfully', data: res1 })
