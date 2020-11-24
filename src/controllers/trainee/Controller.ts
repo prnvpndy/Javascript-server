@@ -24,6 +24,7 @@ class TraineeController {
         try {
             console.log('Inside GET method of Trianee controller ');
             let sort: any;
+            let trainee: any;
            
             if (req.query.sort === 'email') {
                 sort = {email: req.query.sortedby };
@@ -31,9 +32,20 @@ class TraineeController {
             else if (req.query.sort === 'name') {
                 sort = {name: req.query.sortedby };
             } 
-            else
+            else{
             sort = { createdAt: -1 };
-            const trainee = await this.userRepository.list1(sort, req.query.skip, req.query.limit);
+            }
+            let search: any;
+            if (req.query.searchBy !== undefined) {
+                search = await this.userRepository.list1('trainee', sort, req.query.skip, req.query.limit, { name: {$regex: req.query.searchBy}});
+                const list = await this.userRepository.list1('trainee', sort, req.query.skip, req.query.limit, { email: { $regex: req.query.searchBy.toLowerCase()}});
+                trainee = { ...search, ...list};   
+                
+            }
+            else {
+             trainee = await this.userRepository.list1('trainee', sort, req.query.skip, req.query.limit, {});
+            }
+            // const trainee = await this.userRepository.list1(sort, req.query.skip, req.query.limit);
             const countTrainee = await this.userRepository.count()
             console.log('count is ' , countTrainee)
             this.userRepository.getAll()
