@@ -20,6 +20,7 @@ class TraineeController {
     userRepository: UserRepository = new UserRepository();
     get = (req, res, next) => {
         try {
+            
             console.log('Inside GET method of Trianee controller ');
             this.userRepository.getAll()
                 .then((res1) => {
@@ -30,10 +31,11 @@ class TraineeController {
             console.log('Inside Error', err);
         }
     }
-    create = (req, res, next) => {
+    create (req, res, next)  {
         try {
+            const {role, name, email, password} = req.body
             console.log('Inside POST method of Trianee controller ');
-            this.userRepository.create({ role: req.body.role, name: req.body.name, email: req.body.email })
+            this.userRepository.create({ role, name, email})
                 .then((res1) => {
                     console.log('Response is: ', res1);
                     res.status(200).send({ message: 'Trainee created successfully', data: res1 })
@@ -56,7 +58,7 @@ class TraineeController {
                     this.userRepository.update(id, { name: name, role: role, email: email })
                         .then((data) => {
                             console.log("respnse is ", data);
-                            res.status(200).send({ message: "successfully upddate", data: data });
+                            res.status(200).send({ message: "successfully update", data: data });
                         })
                 }
             })
@@ -74,7 +76,7 @@ class TraineeController {
             const userData = userModel.findOne({ originalId: id })
             userModel.findOne({ originalId: id })
             console.log(id, "  Value of ID")
-            const remover = '5fb3663da080091a8c21d58b';
+            const remover = '5fb363da080091a8c21d58b';
             console.log(remover, " remover")
             const user = new UserRepository();
             user.delete(id, remover)
