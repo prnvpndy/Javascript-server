@@ -1,47 +1,3 @@
-// // create a routes.ts file
-// import { Router } from 'express';
-// import UserController from './Controller';
-// import validationHandler from '../../libs/validationHandler';
-// import validation from './validation';
-// import authMoiddleWare from '../../libs/routes/authMiddleWare';
-
-// const UserRouter = Router();
-
-// UserRouter.route('/me')
-//     .get(authMoiddleWare('getUser', 'read'), UserController.me);
-
-// UserRouter.route('/login')
-//     .post(UserController.login);
-
-
-
-// export default UserRouter;
-
-
-
-
-
-
-// // import { Router } from 'express';
-// // import validationHandler from '../../libs/validationHandler';
-// // import validation from './validation';
-
-// // import userController from './Controller';
-
-// // // import {authMiddleWare} from '../../libs/routes/'
-
-
-// // const userRouter  = Router();
-
-// // userRouter.route('/')
-// //       .get( validationHandler (validation.get), userController.get)
-// //       .post(validationHandler(validation.create), userController.create)
-// //       .put(validationHandler(validation.update), userController.update)
-// //       .delete(validationHandler(validation.delete), userController.delete);
-// // export default userRouter;
-
-
-// create a routes.ts file
 import { Router } from "express";
 import UserController from "./Controller";
 import validationHandler from '../../libs/validationHandler';
@@ -49,6 +5,50 @@ import validation from './validation';
 import authMiddleWare from "../../libs/routes/authMiddleWare";
 
 const UserRouter = Router();
+/**
+ * @swagger
+ *
+ *  definitions:
+ *      me:
+ *        type: object
+ *        properties:
+ *          message:
+ *              type: string
+ *              example: Me
+ *          status:
+ *              type: string
+ *              example: OK
+ *          data:
+ *              iss: Online JWT Builder
+ *              iat: 1605048360
+ *              exp: 1636584360
+ *              name: sjbsja
+ *              email: skjhjsabn@successive.tech
+ *              role: trainee
+ *          
+ *      Login:
+ *        type: object
+ *        properties:
+ *          email:
+ *              type: string
+ *              example: trainee@successive.tech
+ *          password:
+ *              type: string
+ *              example: training@123
+ *      Token:
+ *           type: object
+ *           properties:
+ *               status:
+ *                   example: Ok
+ *               message:
+ *                   example: Success
+ *               data:
+ *                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5laGEuZ29lbEBzdWNjZXNzaXZlLnRlY2giLCJpZCI6IjVlNGEzNmJjNjQ4MjRiMWY4MGI3MzBjZCIsImlhdCI6MTU4MjU0OTIyN30.cFV6YYlfmhJ1yL3GyIIgb-PjMTpDNVICd5KGi1ENpVI
+ */
+
+
+
+
 /**
  * @swagger
  *
