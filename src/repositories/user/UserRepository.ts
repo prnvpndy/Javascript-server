@@ -31,8 +31,5 @@ export default class UserRepository extends VersionableRepository<IUserModel, mo
     public count() {
         return userModel.countDocuments();
     }
-    public list1( userRole,sort, skip, limit, searchBy){
-        return super.list( userRole, sort, skip, limit, searchBy);
-     }
 
 }

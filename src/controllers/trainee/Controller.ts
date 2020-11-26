@@ -2,6 +2,7 @@
 import { NextFunction, Response, Request } from 'express';
 import { userModel } from '../../repositories/user/UserModel';
 import UserRepository from '../../repositories/user/UserRepository';
+const userRepository = new UserRepository();
 class TraineeController {
     static instance: TraineeController;
     static getInstance() {
@@ -10,19 +11,13 @@ class TraineeController {
         }
         TraineeController.instance = new TraineeController();
         return TraineeController.instance;;
+        
     }
-    constructor() {
-        this.get = this.get.bind(this);
-        this.create = this.create.bind(this);
-        this.update = this.update.bind(this);
-        this.delete = this.delete.bind(this);
-    }
-    userRepository: UserRepository = new UserRepository();
-    get = (req, res, next) => {
-        try {
-            
+    
+    get(req, res, next) {
+        try {            
             console.log('Inside GET method of Trianee controller ');
-            this.userRepository.getAll()
+            userRepository.getAll()
                 .then((res1) => {
                     console.log('Response is: ', res1);
                     res.status(200).send({ message: 'successfully fetched Trainee', data: res1 })
@@ -35,7 +30,7 @@ class TraineeController {
         try {
             const {role, name, email, password} = req.body
             console.log('Inside POST method of Trianee controller ');
-            this.userRepository.create({ role, name, email})
+            userRepository.create({ role, name, email, password})
                 .then((res1) => {
                     console.log('Response is: ', res1);
                     res.status(200).send({ message: 'Trainee created successfully', data: res1 })
@@ -44,7 +39,7 @@ class TraineeController {
             console.log('Inside Error', err);
         }
     }
-    update = (req, res, next) => {
+    update (req, res, next){
         try {
             const { role, name, id, email, password } = req.body;
             console.log('Inside Update method of Trianee controller ', id);
@@ -55,7 +50,7 @@ class TraineeController {
 
                 if (result != null) {
 
-                    this.userRepository.update(id, { name: name, role: role, email: email })
+                    userRepository.update(id, { updatedAt:Date.now(), updatedBy:id, createdBy:id, deletedAt:Date.now(), deletedBy: id, name:name || result.name, role: role || result.role, email:email || result.email, password: password || result.password })
                         .then((data) => {
                             console.log("respnse is ", data);
                             res.status(200).send({ message: "successfully update", data: data });
@@ -70,7 +65,7 @@ class TraineeController {
     }
 
  
-    public delete = (req, res, next) => {
+    public delete (req, res, next){
         try {
             const id = req.params.id;
             const userData = userModel.findOne({ originalId: id })

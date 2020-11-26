@@ -12,9 +12,7 @@ class UserSchema extends VersionableSchema {
             email: String,
             role: String,
             password: String,
-            originalId: String,
-            deletedAt: Date
-
+            
         });
 
         super (baseSchema, collections);

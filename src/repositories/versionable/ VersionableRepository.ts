@@ -34,7 +34,8 @@ export default class VersioningRepository<D extends mongoose.Document, M extends
 
     public getAll(query: any = {}, projection: any = {}, options: any = {}): DocumentQuery<D[], D> {
         const finalQuery = { deleteAt: null, ...query };
-        return this.model.find(finalQuery, projection, options);
+        const { limit = 0, skip = 0, ...restOption} =options;
+        return this.model.find(finalQuery, projection, restOption).skip(skip).limit(limit);
     }
 
     public findOne(query: any): mongoose.DocumentQuery<D, D> {
@@ -42,46 +43,50 @@ export default class VersioningRepository<D extends mongoose.Document, M extends
         return this.model.findOne(finalQuery);
     }
 
-    public invalidate(id: any): DocumentQuery<D, D> {
-        return this.model.update({ originalId: id, deletedAt: null }, {});
+    public invalidate(id: any, remover: string, prev: any): DocumentQuery<D, D> {
+        const updateToData = {
+            ...prev,
+            deletedAt: Date.now(),
+            deletedBy: remover
+        }
+        return this.model.updateOne({ _id: id, deletedAt:null, deletedBy:null }, updateToData);
     }
 
-
-
     public async update(id: string, data: any): Promise<D> {
-        console.log('Inside versionRepo',id)
-        let originalData;
-        const prev = await this.findOne({ originalId: id, deletedAt: null, deletedBy: null })
+        const prev = await this.findOne({ _id: id, deletedAt: null, deletedBy: null })
 
         console.log('value of prev ', prev)
         
-        originalData = prev;
+        const originalData = prev;
+        const id1=originalData._id;
       
-        this.invalidate(originalData);
+        await this.invalidate(id1,'123', prev);
 
-        console.log('values',originalData)
+        console.log('values of original data',originalData)
 
         const newData = Object.assign(JSON.parse(JSON.stringify(originalData)), data);
         newData._id = VersioningRepository.generateObjectId();
+        console.log("new data",newData)
         delete newData.deletedAt;
+        delete newData.deletedBy;
         const model = new this.model(newData);
         return model.save();
     }
-    public async updateOne(originalData: any) {
-        const oldId = originalData._id;
-        const oldModel = {
-            ...originalData,
-            deletedBy: oldId,
-            deletedAt: Date.now(),
-        };
-        this.model.updateOne({ originalId: oldId }, oldModel)
-            .then((res) => {
-                if (res === null) {
-                    throw 'Error';
-                }
-            })
-            .catch((err) => { console.log("errror is : ", err) });
-    }
+    // public async updateOne(originalData: any) {
+    //     const oldId = originalData._id;
+    //     const oldModel = {
+    //         ...originalData,
+    //         deletedBy: oldId,
+    //         deletedAt: Date.now(),
+    //     };
+    //     this.model.updateOne({ originalId: oldId }, oldModel)
+    //         .then((res) => {
+    //             if (res === null) {
+    //                 throw 'Error';
+    //             }
+    //         })
+    //         .catch((err) => { console.log("errror is : ", err) });
+    // }
 
     public async delete(id: string, remover: string) {
 
@@ -109,8 +114,5 @@ export default class VersioningRepository<D extends mongoose.Document, M extends
                     });
 
             });
-    }
-    public async list(userRole, sort, skip, limit, searchBy): Promise<D[]> {
-        return this.model.find({role: userRole, deletedAt: undefined, ...searchBy}).sort(sort).skip(Number(skip)).limit(Number(limit));
     }
 }
