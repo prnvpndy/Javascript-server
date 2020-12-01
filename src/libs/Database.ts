@@ -14,7 +14,7 @@ class Database {
             }
             seedData();
             resolve(undefined);
-            // console.log("Successfully conected to Mongo");
+            
         });
         
            });

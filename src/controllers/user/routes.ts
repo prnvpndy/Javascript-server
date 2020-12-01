@@ -1,4 +1,4 @@
-// create a routes.ts file
+
 
 import { Router } from "express";
 import UserController from "./Controller";
@@ -15,4 +15,3 @@ UserRouter.route('/login')
     .post(UserController.login);
 
 export default UserRouter;
-// 

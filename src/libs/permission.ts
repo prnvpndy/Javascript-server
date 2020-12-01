@@ -1,4 +1,4 @@
-// function for hasPermission for validate the Username,role and permission
+
 function hasPermission(moduleName, role, permissionType) {
       if (! moduleName.hasOwnProperty(permissionType)) {
           console.log('false');
@@ -11,9 +11,5 @@ function hasPermission(moduleName, role, permissionType) {
       }
       return true ;
    }
-  /* hasPermission(permissions.getUsers,'head-trainer','all');
-   hasPermission(permissions.getUsers,'head-trainer','read');
-   hasPermission(permissions.getUsers1,'trainer','write');
-   hasPermission(permissions.getUsers1,'trainer','delete');*/
-// export {permissions};
+ 
 export { hasPermission };

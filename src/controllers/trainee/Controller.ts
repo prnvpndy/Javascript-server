@@ -1,4 +1,4 @@
-// create a class according to instructions that mention in #39523
+
 import { NextFunction, Response, Request } from 'express';
 import UserRepository from '../../repositories/user/UserRepository';
 const userRepository = new UserRepository();
@@ -82,4 +82,3 @@ class TraineeController {
 }
 export default TraineeController.getInstance();
 
-// export default new TraineeController();
