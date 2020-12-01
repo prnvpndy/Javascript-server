@@ -1,17 +1,13 @@
 export default ( config ) => ( req, res, next  ) => {
       const errors = [];
-      console.log( 'Inside ValidationHandler Middleware' );
-      // console.log( req.body );
-      // console.log( req.query );
-      // console.log(Object.keys( req.query ).length );
       const keys = Object.keys( config );
       keys.forEach((key) => {
           const obj = config[key];
-          console.log('key is' , key);
+
           const values = obj.in.map( ( val ) => {
               return req[ val ][ key ];
           });
-          // Checking for In i.e Body or Query
+
           if (Object.keys( req[obj.in] ).length === 0) {
               errors.push({
                   key: {key},
@@ -19,8 +15,7 @@ export default ( config ) => ( req, res, next  ) => {
                   message: obj.errorMessage || `Values should be passed through ${obj.in}`,
               });
           }
-          // Checking for required
-          console.log('values is' , values);
+
           if (obj.required) {
               if (isNull(values[0])) {
                   errors.push({
@@ -30,7 +25,7 @@ export default ( config ) => ( req, res, next  ) => {
                   });
               }
           }
-          // Checking for string
+
           if (obj.string) {
               if ( !( typeof ( values[0] ) === 'string' ) ) {
                   errors.push({
@@ -40,7 +35,6 @@ export default ( config ) => ( req, res, next  ) => {
                   });
               }
           }
-          // Checking for object
           if (obj.isObject) {
               if ( !( typeof ( values ) === 'object' ) ) {
                   errors.push({
@@ -50,7 +44,6 @@ export default ( config ) => ( req, res, next  ) => {
                   });
               }
           }
-          // Checking for regex
           if (obj.regex) {
               const regex = obj.regex;
               if (!regex.test(values[0])) {
@@ -61,13 +54,13 @@ export default ( config ) => ( req, res, next  ) => {
                   });
               }
           }
-          // Checking for default
+
           if (obj.default) {
               if (isNull(values[0])) {
                   values[0] === obj.default;
               }
           }
-          // Checking for number
+
           if (obj.number) {
               if (isNaN(values[0]) || values[0] === undefined) {
                   errors.push({
