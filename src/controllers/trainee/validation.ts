@@ -1,15 +1,3 @@
-// const config ={
-//       create: {
-//             id: {
-//                   required:true,
-//                   string: true,
-//                   in: ['body'],
-//                   custom: function (value){
-//                         console.log
-//                   }
-//             }
-//       }
-// }
 const config = {
       create:
       {
@@ -35,7 +23,7 @@ const config = {
             id: {
                   required: true,
                   errorMessage: 'Id is required',
-                  in: ['params'] }
+                  in: ['query'] }
             },
       get: {
             skip: {

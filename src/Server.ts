@@ -1,4 +1,4 @@
-// create a class and define methods according to the ticket#39522
+
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import { notFoundHandler, errorHandler } from './libs/routes';
@@ -13,8 +13,8 @@ class Server {
         this.app = express();
     }
     bootstrap() {
-        this.setupRoutes();
         this.initBodyParser();
+        this.setupRoutes();
         return this;
     }
     setupRoutes() {
@@ -37,7 +37,7 @@ class Server {
         return this;
     }
     initBodyParser() {
-        this.app.use(bodyParser.json({ type: 'application/*+json' }));
+        this.app.use(bodyParser.json());
     }
     run() {
 
