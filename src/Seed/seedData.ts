@@ -39,7 +39,7 @@ export default () => {
     userRepo.count()
     .then(res => {
         if (res === 0) {
-            console.log('data seeding in progress');
+            
             userRepo.create(user.user1);
             userRepo.create(user.user2);
         }

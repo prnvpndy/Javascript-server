@@ -17,11 +17,11 @@ export default class UserRepository extends VersionableRepository<IUserModel, mo
         return userModel.find(query, projection, options)
     }
     public create(data: any): Promise<IUserModel> {
-        console.log('UserRepository:: create', data);
+        
         return super.create(data)
     }
     public update(id: any, data: any): Promise<IUserModel> {
-        console.log('USerRepository:: update', data);
+       
         return super.update(id, data);
     }
 

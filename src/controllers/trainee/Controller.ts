@@ -15,31 +15,28 @@ class TraineeController {
 
       get(req, res, next) {
             try {
-                  console.log('Inside GET method of Trianee controller ');
                   userRepository.getAll()
                         .then((res1) => {
-                              console.log('Response is: ', res1);
                               res.status(200).send({ message: 'successfully fetched Trainee', data: res1 });
                         });
             } catch (err) {
-                  console.log('Inside Error', err);
+                  res.status(200).send({ message: 'Inside error block', error: err });
             }
       }
       create(req, res, next) {
             try {
                   const { role, name, email, password } = req.body;
-                  console.log('Inside POST method of Trianee controller ');
                   userRepository.create({ role, name, email, password })
                         .then((res1) => {
-                              console.log('Response is: ', res1);
+
                               res.status(200).send({ message: 'Trainee created successfully', data: res1 });
                         });
             } catch (err) {
-                  console.log('Inside Error', err);
+                  res.status(200).send({ message: 'Inside error block', error: err });
             }
       }
       public async update(req, res, next) {
-            console.log('Inside update method trainee');
+
             const { id, ...restData } = req.body;
             await userRepository.update(id, restData)
                   .then((result) => {

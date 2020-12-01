@@ -1,11 +1,11 @@
 export default ( config ) => ( req, res, next  ) => {
       const errors = [];
-      console.log( 'Inside ValidationHandler Middleware' );
+      
       
       const keys = Object.keys( config );
       keys.forEach((key) => {
           const obj = config[key];
-          console.log('key is' , key);
+          
           const values = obj.in.map( ( val ) => {
               return req[ val ][ key ];
           });
@@ -18,7 +18,7 @@ export default ( config ) => ( req, res, next  ) => {
               });
           }
           
-          console.log('values is' , values);
+          
           if (obj.required) {
               if (isNull(values[0])) {
                   errors.push({
