@@ -7,14 +7,14 @@ const user1 = {
     name: 'Head Trainer',
     role: 'head-trainer',
     email: 'headtrainer@successive.tech',
-    password: hashFunction()
+    password: hashFunction(config.password)
 };
 
 const user2 = {
     name: 'Trainee',
     role: 'Trainee',
     email: 'trainee@successive.tech',
-    password: hashFunction()
+    password: hashFunction(config.password)
 };
 
 export default {user1, user2};

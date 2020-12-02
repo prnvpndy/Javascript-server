@@ -2,8 +2,9 @@ import config from '../config/configuration';
 import * as bcrypt from 'bcrypt';
 
 
-export default function hashFunction(){
+export default function hashFunction(password){
 
-     return bcrypt.hashSync(config.password, 10)
+     const hashPass = bcrypt.hashSync(password, 10)
+     return hashPass;
 
 }

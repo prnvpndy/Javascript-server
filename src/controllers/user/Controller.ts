@@ -26,7 +26,7 @@ class UserController {
             userRepository.findOne({ email })            
                 .then((data) => {
                     if (data !== undefined) {
-                        if (bcrypt.compareSync(password,hashFunction())) {                            
+                        if (bcrypt.compareSync(password,hashFunction(password))) {                            
                             const token = jwt.sign({ data }, config.secretKey, {
                               expiresIn: '15m'
                             });
