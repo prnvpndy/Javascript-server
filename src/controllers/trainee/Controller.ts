@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcrypt';
 import { NextFunction, Response, Request } from 'express';
 import UserRepository from '../../repositories/user/UserRepository';
-import hashFunction from '../../libs/utilities';
+import createHashPassword from '../../libs/utilities';
 const userRepository = new UserRepository();
 class TraineeController {
       static instance: TraineeController;
@@ -27,8 +27,8 @@ class TraineeController {
       create(req, res, next) {
             try {
                   const { role, name, email, password } = req.body;
-                  const pswrd = hashFunction(password);
-                  userRepository.create({ role, name, email, password:pswrd })
+                  const hashPassword = createHashPassword(password);
+                  userRepository.create({ role, name, email, password:hashPassword })
                         .then((res1) => {
 
                               res.status(200).send({ message: 'Trainee created successfully', data: res1 });
