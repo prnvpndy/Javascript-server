@@ -22,11 +22,10 @@ class UserController {
 
         try {
             const { email, password } = req.body;
-            userRepository.findOne({ email1: email })
+            userRepository.findOne({ email })            
                 .then((data) => {
                     if (data !== undefined) {
-                        if (password === data.password) {
-                            data.password = bcrypt.hashSync(data.password, 10);
+                        if (bcrypt.compareSync(password,data.password)) {                            
                             const token = jwt.sign({ data }, config.secretKey, {
                               expiresIn: '15m'
                             });

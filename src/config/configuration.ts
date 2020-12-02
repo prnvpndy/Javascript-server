@@ -17,9 +17,8 @@
 // config();
 import IConfig from './IConfig';
 import dotenv from 'dotenv';
-/* tslint-disable */
+
 const envVars = require ('dotenv').config();
-// console.log("inside config" , envVars);
 const config = {
     port : envVars.parsed.PORT,
     nodeEnv : envVars.parsed.NODE_ENV,
@@ -30,5 +29,3 @@ const config = {
 
 Object.freeze( config );
 export default config;
-/* tslint-disable */
-// export default configurations;

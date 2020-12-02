@@ -37,6 +37,7 @@ export default class VersioningRepository<D extends mongoose.Document, M extends
 
       public findOne(query: any): mongoose.DocumentQuery<D, D> {
             const finalQuery = { deleteAt: undefined, ...query };
+            console.log("Inside findone")
             return this.model.findOne(finalQuery);
       }
 
