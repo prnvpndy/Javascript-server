@@ -3,6 +3,7 @@ import { Request, Response, NextFunction, request } from 'express';
 import UserRepository from '../../repositories/user/UserRepository';
 import * as bcrypt from 'bcrypt';
 import config from '../../config/configuration';
+import hashFunction from '../../libs/utilities';
 
 const userRepository = new UserRepository();
 class UserController {
@@ -25,7 +26,7 @@ class UserController {
             userRepository.findOne({ email })            
                 .then((data) => {
                     if (data !== undefined) {
-                        if (bcrypt.compareSync(password,data.password)) {                            
+                        if (bcrypt.compareSync(password,hashFunction())) {                            
                             const token = jwt.sign({ data }, config.secretKey, {
                               expiresIn: '15m'
                             });
