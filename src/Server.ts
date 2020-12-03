@@ -1,4 +1,3 @@
-// create a class and define methods according to the ticket#39522
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import { notFoundHandler, errorHandler } from './libs/routes';

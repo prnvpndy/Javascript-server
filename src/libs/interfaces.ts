@@ -1,6 +1,3 @@
-
-// create interfaces according to the instruction mention in ticket#39520
-
 interface Ipermission {
       'getUsers': {
    all: string [];
@@ -16,7 +13,7 @@ interface Ipermission {
      };
   }
   interface Iusers {
-      
+
           traineeEmail: string;
           reviewerEmail: string;
       }
