@@ -3,7 +3,7 @@ import { Request, Response, NextFunction, request } from 'express';
 import UserRepository from '../../repositories/user/UserRepository';
 import * as bcrypt from 'bcrypt';
 import config from '../../config/configuration';
-import compareHashPassword from '../../libs/utilities';
+import {compareHashPassword} from '../../libs/utilities';
 
 const userRepository = new UserRepository();
 class UserController {
@@ -19,15 +19,15 @@ class UserController {
         const { user } = req;
         return res.status(200).send({ message: 'Me', status: 'ok', data: user });
     }
-    login(req: Request, res: Response, next: NextFunction) {
+    async login (req: Request, res: Response, next: NextFunction) {
 
         try {
             const { email, password } = req.body;
-            userRepository.findOne({ email })            
-                .then((data) => {
+            const data = await userRepository.findOne({ email })            
+            
                     if (data !== null) {
-                        if (compareHashPassword(password)) {         
-                                              
+                        const password1 = await compareHashPassword(password, email)
+                        if (password1) {              
                             const token = jwt.sign({ data }, config.secretKey, {
                               expiresIn: '15m'
                             });
@@ -37,14 +37,20 @@ class UserController {
                                 status: 200
                             });
                         }
-                    }
                         else {
                             res.send({
                                 message: 'Password Doesnt Match',
                                 status: 400
                             });
+                    }
+                }
+                        else {
+                            res.send({
+                                message: 'User not exist',
+                                status: 400
+                            });
                         }
-                });
+                
             } catch (err) {
                   res.status(200).send({ message: 'Inside error block', error: err });
         res.send(err);

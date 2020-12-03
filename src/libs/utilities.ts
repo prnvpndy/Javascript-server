@@ -2,6 +2,7 @@ import config from '../config/configuration';
 import { Request, Response, NextFunction, request } from 'express';
 import * as bcrypt from 'bcrypt';
 import UserRepository from '../repositories/user/UserRepository';
+import { isNamedExportBindings } from 'typescript';
 
 
 export default function createHashPassword(password){
@@ -12,16 +13,13 @@ export default function createHashPassword(password){
 }
 const userRepository = new UserRepository();
 
-export function compareHashPassword (req: Request, res: Response, next: NextFunction){
-     const { email, password } = req.body;
-     console.log("sgfvsahghg")
-    const data= userRepository.findOne({ email }) 
+export async function compareHashPassword (password, email){
+     
+    const data= await userRepository.findOne({ email }) 
               
          if(data){
-              console.log("hsdjhsgdvjvjhs");
-     const comaprePass= bcrypt.compareSync(password,data.password)
-     console.log("ggfsh",comaprePass)
-    return true;
-         };
-         return false;
+              const comaprePass= await bcrypt.compareSync(password,data.password)
+              
+              return comaprePass;
+} 
 }
