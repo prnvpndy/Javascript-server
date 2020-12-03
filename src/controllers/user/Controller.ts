@@ -1,8 +1,8 @@
 import * as jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction, request } from 'express';
 import UserRepository from '../../repositories/user/UserRepository';
-import * as bcrypt from 'bcrypt';
 import config from '../../config/configuration';
+import {compareHashPassword }from '../../libs/utilities';
 
 const userRepository = new UserRepository();
 class UserController {
@@ -18,35 +18,39 @@ class UserController {
         const { user } = req;
         return res.status(200).send({ message: 'Me', status: 'ok', data: user });
     }
-    login(req: Request, res: Response, next: NextFunction) {
+    async login (req: Request, res: Response, next: NextFunction) {
 
         try {
-            
             const { email, password } = req.body;
+            const data = await userRepository.findOne({ email })            
             
-            userRepository.findOne({ email: email })
-                .then((data) => {
-                    if (data != null) {
-                        if (password === data.password) {
-                            data.password = bcrypt.hashSync(data.password, 10);
-                            const token = jwt.sign({ data }, 'qwertyuiopasdfghjklzxcvbnm123456');
-                            
+                    if (data !== null) {
+                        const hasAccess = compareHashPassword(password, data.password)
+                        if (hasAccess) {              
+                            const token = jwt.sign({ data }, config.secretKey, {
+                              expiresIn: '15m'
+                            });
                             res.send({
                                 data: token,
                                 message: 'Login successfully',
                                 status: 200
                             });
                         }
-                    }
                         else {
                             res.send({
                                 message: 'Password Doesnt Match',
                                 status: 400
                             });
-                        }                    
-                });
-               
-            } catch(err) {
+                    }
+                }
+                        else {
+                            res.send({
+                                message: 'User not exist',
+                                status: 400
+                            });
+                        }
+                
+            } catch (err) {
                   res.status(200).send({ message: 'Inside error block', error: err });
         res.send(err);
     }
@@ -54,3 +58,4 @@ class UserController {
 }
 }
 export default UserController.getInstance();
+

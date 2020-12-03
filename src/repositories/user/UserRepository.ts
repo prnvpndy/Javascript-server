@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 import { userModel } from './UserModel';
 import IUserModel from './IUserModel';
-import VersionableRepository from "../versionable/ VersionableRepository";
+import VersionableRepository from '../versionable/ VersionableRepository';
 export default class UserRepository extends VersionableRepository<IUserModel, mongoose.Model<IUserModel>> {
 
     public static generateObjectId() {
@@ -17,11 +17,11 @@ export default class UserRepository extends VersionableRepository<IUserModel, mo
         return userModel.find(query, projection, options)
     }
     public create(data: any): Promise<IUserModel> {
-        
-        return super.create(data)
+
+        return super.create(data);
     }
     public update(id: any, data: any): Promise<IUserModel> {
-       
+
         return super.update(id, data);
     }
 

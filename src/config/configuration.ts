@@ -17,18 +17,15 @@
 // config();
 import IConfig from './IConfig';
 import dotenv from 'dotenv';
-/* tslint-disable */
+
 const envVars = require ('dotenv').config();
-// console.log("inside config" , envVars);
 const config = {
     port : envVars.parsed.PORT,
     nodeEnv : envVars.parsed.NODE_ENV,
     mongoUrl : envVars.parsed.MONGO_URL,
     password: envVars.parsed.password,
-    key: envVars.parsed.KEY
+    secretKey: envVars.parsed.secretKey
 };
 
 Object.freeze( config );
 export default config;
-/* tslint-disable */
-// export default configurations;

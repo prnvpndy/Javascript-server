@@ -1,6 +1,7 @@
 
-import { NextFunction, Response, Request } from 'express';
+
 import UserRepository from '../../repositories/user/UserRepository';
+import {createHashPassword} from '../../libs/utilities';
 const userRepository = new UserRepository();
 class TraineeController {
       static instance: TraineeController;
@@ -26,7 +27,8 @@ class TraineeController {
       create(req, res, next) {
             try {
                   const { role, name, email, password } = req.body;
-                  userRepository.create({ role, name, email, password })
+                  const hashPassword = createHashPassword(password);
+                  userRepository.create({ role, name, email, password:hashPassword })
                         .then((res1) => {
 
                               res.status(200).send({ message: 'Trainee created successfully', data: res1 });
@@ -78,4 +80,3 @@ class TraineeController {
       }
 }
 export default TraineeController.getInstance();
-

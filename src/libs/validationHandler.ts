@@ -1,15 +1,13 @@
 export default ( config ) => ( req, res, next  ) => {
       const errors = [];
-      
-      
       const keys = Object.keys( config );
       keys.forEach((key) => {
           const obj = config[key];
-          
+
           const values = obj.in.map( ( val ) => {
               return req[ val ][ key ];
           });
-          
+
           if (Object.keys( req[obj.in] ).length === 0) {
               errors.push({
                   key: {key},
@@ -17,8 +15,7 @@ export default ( config ) => ( req, res, next  ) => {
                   message: obj.errorMessage || `Values should be passed through ${obj.in}`,
               });
           }
-          
-          
+
           if (obj.required) {
               if (isNull(values[0])) {
                   errors.push({

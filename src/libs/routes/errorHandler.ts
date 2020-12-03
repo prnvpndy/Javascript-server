@@ -1,5 +1,3 @@
-
-
 import { Request, Response, NextFunction, request, response } from 'express';
 
 export default (err, req: Request, res: Response, next: NextFunction) => {

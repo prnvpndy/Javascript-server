@@ -13,7 +13,7 @@ interface Ipermission {
      };
   }
   interface Iusers {
-      
+
           traineeEmail: string;
           reviewerEmail: string;
       }
