@@ -1,7 +1,7 @@
-import * as bcrypt from 'bcrypt';
-import { NextFunction, Response, Request } from 'express';
+
+
 import UserRepository from '../../repositories/user/UserRepository';
-import createHashPassword from '../../libs/utilities';
+import {createHashPassword} from '../../libs/utilities';
 const userRepository = new UserRepository();
 class TraineeController {
       static instance: TraineeController;

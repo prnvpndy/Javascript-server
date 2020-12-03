@@ -1,9 +1,8 @@
 import * as jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction, request } from 'express';
 import UserRepository from '../../repositories/user/UserRepository';
-import * as bcrypt from 'bcrypt';
 import config from '../../config/configuration';
-import {compareHashPassword} from '../../libs/utilities';
+import {compareHashPassword }from '../../libs/utilities';
 
 const userRepository = new UserRepository();
 class UserController {
@@ -26,8 +25,8 @@ class UserController {
             const data = await userRepository.findOne({ email })            
             
                     if (data !== null) {
-                        const password1 = await compareHashPassword(password, email)
-                        if (password1) {              
+                        const hasAccess = compareHashPassword(password, data.password)
+                        if (hasAccess) {              
                             const token = jwt.sign({ data }, config.secretKey, {
                               expiresIn: '15m'
                             });
