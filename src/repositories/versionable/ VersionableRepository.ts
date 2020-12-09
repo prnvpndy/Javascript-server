@@ -92,7 +92,5 @@ export default class VersioningRepository<D extends mongoose.Document, M extends
                               });
 
                   });
-      }
-  
+      }  
 }
-
