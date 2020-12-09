@@ -14,30 +14,33 @@ class TraineeController {
 
       }
       userRepository: UserRepository= new UserRepository();
-       get= async(req, res, next)=> {
-            try {
-                  let sort: any;
-                  if (req.query.sort === 'email') {
-                        sort = { email: req.query.sortedby };
-                  }
-                  else if (req.query.sort === 'name') {
-                        sort = { name: req.query.sortedby };
-                  }
-                  else
-                        sort = { createdAt: -1 };
-                  const trainee = await this.userRepository.list1('trainee', sort, req.query.skip, req.query.limit);
-                  const countTrainee =  await this.userRepository.count()
-                  console.log("trainee data ",trainee)
-                  console.log('count is ', countTrainee)
-                  this.userRepository.getAll()
-                        .then((res1) => {
-                              res.status(200).send({ message: 'successfully fetched Trainee',TotalCount:countTrainee, TraineeCount:trainee.length, data: trainee });
+       
+      public get(req, res, next){
+            
+            
+                  let {limit = 0, skip = 0 } = req.query;
+                  skip= Number(skip);
+                  limit = Number(limit);
+
+             userRepository.getAll(limit, skip, {sort : {name: -1, email: -1}})
+                  .then((data) => {
+                     
+                        
+                        res.status(200).send({
+                              status: 'ok',
+                              message: 'Fetched Successfully',
+                              Trainees : data
                         });
-            } catch (err) {
-                  res.status(200).send({ message: 'Inside error block', error: err });
+                  })
+                  .catch((err) => {
+                        res.send({
+                              message: 'Not Fetched',
+                              status : 404
+                        });
+                  });
             }
-      };
-      create(req, res, next) {
+
+      public async create(req, res, next) {
             try {
                   const { role, name, email, password } = req.body;
                   const hashPassword = createHashPassword(password);

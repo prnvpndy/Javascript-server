@@ -29,9 +29,11 @@ export default class VersioningRepository<D extends mongoose.Document, M extends
             return this.model.countDocuments(finalQuery);
       }
 
-      public getAll(query: any = {}, projection: any = {}, options: any = {}): DocumentQuery<D[], D> {
+      public getAll(query: any = {}, projection: any = {},  options: any = {}): DocumentQuery<D[], D> {
             const finalQuery = { deleteAt: undefined, ...query };
-            return this.model.find(finalQuery, projection, options);
+            const { limit = 0, skip = 0, ...restOption} = options
+            
+            return this.model.find(finalQuery,projection, restOption).skip(skip).limit(limit);
       }
 
       public findOne(query: any): mongoose.DocumentQuery<D, D> {
@@ -91,9 +93,6 @@ export default class VersioningRepository<D extends mongoose.Document, M extends
 
                   });
       }
-      public async list(userRole, sort, skip, limit): Promise<D[]> {
-            return this.model.find({role: userRole}).sort(sort).skip(Number(skip)).limit(Number(limit));
-      }
-      
+  
 }
 
