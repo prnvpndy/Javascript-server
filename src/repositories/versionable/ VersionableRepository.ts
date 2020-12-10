@@ -1,6 +1,5 @@
 import * as mongoose from "mongoose";
 import { DocumentQuery, Query } from "mongoose";
-import IVersionableDocument from './IVersionableDocument';
 
 export default class VersioningRepository<D extends mongoose.Document, M extends mongoose.Model<D>> {
       public static generateObjectId() {
@@ -30,9 +29,11 @@ export default class VersioningRepository<D extends mongoose.Document, M extends
             return this.model.countDocuments(finalQuery);
       }
 
-      public getAll(query: any = {}, projection: any = {}, options: any = {}): DocumentQuery<D[], D> {
+      public getAll(query: any = {}, projection: any = {},  options: any = {}): DocumentQuery<D[], D> {
             const finalQuery = { deleteAt: undefined, ...query };
-            return this.model.find(finalQuery, projection, options);
+            const { limit = 0, skip = 0, ...restOption} = options
+            
+            return this.model.find(finalQuery,projection, restOption).skip(skip).limit(limit);
       }
 
       public findOne(query: any): mongoose.DocumentQuery<D, D> {
@@ -64,13 +65,11 @@ export default class VersioningRepository<D extends mongoose.Document, M extends
             const model = new this.model(newData);
             return model.save();
       }
-
-
-      public async delete(id: string, remover: string) {
+      public async delete(id: any, remover: any) {
 
             let originalData;
 
-            await this.findOne({ id: id, deletedAt: undefined })
+            await this.findOne({ originalId: id, deletedAt: undefined, deletedBy: undefined })
                   .then((data) => {
                         if (data === null) {
                               throw '';
@@ -80,6 +79,7 @@ export default class VersioningRepository<D extends mongoose.Document, M extends
                         const oldId = originalData._id;
 
                         const modelDelete = {
+                              ...originalData,
                               deletedAt: Date.now(),
                               deletedBy: remover,
                         };
@@ -92,5 +92,5 @@ export default class VersioningRepository<D extends mongoose.Document, M extends
                               });
 
                   });
-      }
+      }  
 }

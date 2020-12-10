@@ -1,8 +1,8 @@
-
-
 import UserRepository from '../../repositories/user/UserRepository';
-import {createHashPassword} from '../../libs/utilities';
-const userRepository = new UserRepository();
+import { createHashPassword } from '../../libs/utilities';
+
+
+const userRepository:UserRepository = new UserRepository();
 class TraineeController {
       static instance: TraineeController;
       static getInstance() {
@@ -13,22 +13,38 @@ class TraineeController {
             return TraineeController.instance;
 
       }
+      userRepository: UserRepository= new UserRepository();
+       
+      public get(req, res, next){
+            
+            
+                  let {limit = 0, skip = 0 } = req.query;
+                  skip= Number(skip);
+                  limit = Number(limit);
 
-      get(req, res, next) {
-            try {
-                  userRepository.getAll()
-                        .then((res1) => {
-                              res.status(200).send({ message: 'successfully fetched Trainee', data: res1 });
+             userRepository.getAll(limit, skip, {sort : {name: -1, email: -1}})
+                  .then((data) => {
+                     
+                        
+                        res.status(200).send({
+                              status: 'ok',
+                              message: 'Fetched Successfully',
+                              Trainees : data
                         });
-            } catch (err) {
-                  res.status(200).send({ message: 'Inside error block', error: err });
+                  })
+                  .catch((err) => {
+                        res.send({
+                              message: 'Not Fetched',
+                              status : 404
+                        });
+                  });
             }
-      }
-      create(req, res, next) {
+
+      public async create(req, res, next) {
             try {
                   const { role, name, email, password } = req.body;
                   const hashPassword = createHashPassword(password);
-                  userRepository.create({ role, name, email, password:hashPassword })
+                  userRepository.create({ role, name, email, password: hashPassword })
                         .then((res1) => {
 
                               res.status(200).send({ message: 'Trainee created successfully', data: res1 });
