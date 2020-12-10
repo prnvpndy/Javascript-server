@@ -132,7 +132,4 @@ UserRouter.route('/me')
 UserRouter.route('/login')
     .post(authMiddleWare('getUser', 'read'), validationHandler(validation.get),  UserController.login);
 
-
-
 export default UserRouter;
-// 

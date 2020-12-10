@@ -92,11 +92,6 @@ traineeRouter.route('/')
  *         in: query
  *         required: false
  *         type: string
- *       - name: sortedBy
- *         description: Elements to sort By(sorting order)
- *         in: query
- *         required: false
- *         type: string
  *       - name: searchBy
  *         description: Element to search
  *         in: query
@@ -248,4 +243,5 @@ traineeRouter.route('/')
  *              $ref: '#/definitions/Unauthorized'
  */
       .delete(authMiddleWare('getUser', 'read'), validationHandler(validation.delete), TraineeController.delete);
+      
 export default traineeRouter;
