@@ -26,14 +26,11 @@ class TraineeController {
                   skip,
                   sort: { name: -1, email: -1 },
             }
-
-            let sort: any;
-            let trainee: any;
-            const search = searchText ? searchText.toLowerCase() : "";
             const query = {};
             if (searchText) {
                   query['$or'] = [{ name: new RegExp(searchText, 'i') }, { email: new RegExp(searchText, 'i') }]
-
+            }          
+            
                   userRepository.getAll( query , {}, options)
 
                         .then((data) => {
@@ -50,9 +47,10 @@ class TraineeController {
                               });
                         });
 
-            } else {
-                  trainee = this.userRepository.getAll('trainee', sort, {});
-            }
+              
+            //  else {
+            //       trainee = this.userRepository.getAll('trainee', sort, {});
+            // }
       }
 
       public async create(req, res, next) {
