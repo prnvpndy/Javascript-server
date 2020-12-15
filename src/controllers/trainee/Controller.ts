@@ -17,7 +17,7 @@ class TraineeController {
 
       public get(req, res, next) {
 
-            let { limit = 0, skip = 0, searchBy } = req.query;
+            let { limit = 0, skip = 0, searchText } = req.query;
             skip = Number(skip);
             limit = Number(limit);
 
@@ -29,20 +29,14 @@ class TraineeController {
 
             let sort: any;
             let trainee: any;
-            //let search: any;
-            const search = searchBy ? searchBy.toLowerCase() : "";
-            console.log("search value", search)
-            if (search) {
-                  function escapeRegExp(text) {
-                        return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
-                  }
-                  const regex = new RegExp(escapeRegExp(req.query.searchBy), 'gi');
+            const search = searchText ? searchText.toLowerCase() : "";
+            const query = {};
+            if (searchText) {
+                  query['$or'] = [{ name: new RegExp(searchText, 'i') }, { email: new RegExp(searchText, 'i') }]
 
-                  userRepository.getAll({$or: [{name: {$regex: search, $options: 'i'}},{email: {$regex: search, $options: 'i'}}]}, {}, options)
+                  userRepository.getAll({ $or: [{ name: { $regex: search, $options: 'i' } }, { email: { $regex: search, $options: 'i' } }] }, {}, options)
 
                         .then((data) => {
-
-
                               res.status(200).send({
                                     status: 'ok',
                                     message: 'Fetched Successfully',
@@ -56,10 +50,7 @@ class TraineeController {
                               });
                         });
 
-            }
-
-
-            else {
+            } else {
                   trainee = this.userRepository.getAll('trainee', sort, {});
             }
       }
@@ -77,8 +68,8 @@ class TraineeController {
                   res.status(200).send({ message: 'Inside error block', error: err });
             }
       }
-      public async update(req, res, next) {
 
+      public async update(req, res, next) {
             const { id, ...restData } = req.body;
             await userRepository.update(id, restData)
                   .then((result) => {
@@ -95,6 +86,7 @@ class TraineeController {
                         });
                   });
       }
+      
       public delete(req, res, next) {
             try {
                   const id = req.params.id;
