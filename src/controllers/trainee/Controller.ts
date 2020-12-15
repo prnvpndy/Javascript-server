@@ -2,7 +2,7 @@ import UserRepository from '../../repositories/user/UserRepository';
 import { createHashPassword } from '../../libs/utilities';
 
 
-const userRepository:UserRepository = new UserRepository();
+const userRepository: UserRepository = new UserRepository();
 class TraineeController {
       static instance: TraineeController;
       static getInstance() {
@@ -13,32 +13,45 @@ class TraineeController {
             return TraineeController.instance;
 
       }
-      userRepository: UserRepository= new UserRepository();
-       
-      public get(req, res, next){
-            
-            
-                  let {limit = 0, skip = 0 } = req.query;
-                  skip= Number(skip);
-                  limit = Number(limit);
+      userRepository: UserRepository = new UserRepository();
 
-             userRepository.getAll(limit, skip, {sort : {name: -1, email: -1}})
-                  .then((data) => {
-                     
-                        
-                        res.status(200).send({
-                              status: 'ok',
-                              message: 'Fetched Successfully',
-                              Trainees : data
-                        });
-                  })
-                  .catch((err) => {
-                        res.send({
-                              message: 'Not Fetched',
-                              status : 404
-                        });
-                  });
+      public get(req, res, next) {
+
+            let { limit = 0, skip = 0, searchText } = req.query;
+            skip = Number(skip);
+            limit = Number(limit);
+
+            const options = {
+                  limit,
+                  skip,
+                  sort: { name: -1, email: -1 },
             }
+            const query = {};
+            if (searchText) {
+                  query['$or'] = [{ name: new RegExp(searchText, 'i') }, { email: new RegExp(searchText, 'i') }]
+            }          
+            
+                  userRepository.getAll( query , {}, options)
+
+                        .then((data) => {
+                              res.status(200).send({
+                                    status: 'ok',
+                                    message: 'Fetched Successfully',
+                                    Trainees: data
+                              });
+                        })
+                        .catch((err) => {
+                              res.send({
+                                    message: 'Not Fetched',
+                                    status: 404
+                              });
+                        });
+
+              
+            //  else {
+            //       trainee = this.userRepository.getAll('trainee', sort, {});
+            // }
+      }
 
       public async create(req, res, next) {
             try {
@@ -53,8 +66,8 @@ class TraineeController {
                   res.status(200).send({ message: 'Inside error block', error: err });
             }
       }
-      public async update(req, res, next) {
 
+      public async update(req, res, next) {
             const { id, ...restData } = req.body;
             await userRepository.update(id, restData)
                   .then((result) => {
@@ -71,6 +84,7 @@ class TraineeController {
                         });
                   });
       }
+      
       public delete(req, res, next) {
             try {
                   const id = req.params.id;
