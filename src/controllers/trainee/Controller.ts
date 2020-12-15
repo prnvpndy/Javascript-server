@@ -34,7 +34,7 @@ class TraineeController {
             if (searchText) {
                   query['$or'] = [{ name: new RegExp(searchText, 'i') }, { email: new RegExp(searchText, 'i') }]
 
-                  userRepository.getAll({ $or: [{ name: { $regex: search, $options: 'i' } }, { email: { $regex: search, $options: 'i' } }] }, {}, options)
+                  userRepository.getAll( query , {}, options)
 
                         .then((data) => {
                               res.status(200).send({
