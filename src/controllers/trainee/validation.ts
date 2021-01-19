@@ -1,7 +1,7 @@
 const config = {
       create:
       {
-            id: {
+            email: {
                   required: true,
                   string: true,
                   in: [ 'body' ],
@@ -47,14 +47,7 @@ const config = {
                   string: true,
                   in: ['body']
             },
-      dataToUpdate: {
-                        in: ['body'],
-                        required: true,
-                        isObject: true,
-                        custom: (dataToUpdate) => {
-                              console.log();
-                        },
-                   }
+     
                   }
 };
 export default config;

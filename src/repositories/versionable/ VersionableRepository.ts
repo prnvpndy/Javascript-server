@@ -35,10 +35,10 @@ export default class VersioningRepository<D extends mongoose.Document, M extends
             return this.model.find(finalQuery, projection, options);
             }
 
-      public findOne(query: any): mongoose.DocumentQuery<D, D> {
-            const finalQuery = { deleteAt: undefined, ...query };
-            return this.model.findOne(finalQuery);
-      }
+            public findOne(query: any): mongoose.DocumentQuery<D, D> {
+                  const finalQuery = { deleteAt: null, ...query };
+                  return this.model.findOne(finalQuery);
+              }
 
       public invalidate(id: any, prev: any): DocumentQuery<D, D> {
             const updateToData = {

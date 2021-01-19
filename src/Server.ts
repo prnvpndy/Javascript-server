@@ -7,6 +7,7 @@ import { notFoundHandler, errorHandler } from './libs/routes';
 import notFoundRoute from './libs/routes/notFoundRoute';
 import Database from './libs/Database';
 import Iconfig from './config/IConfig';
+import * as cors from 'cors';
 
 import routes from './router';
 class Server {
@@ -43,6 +44,7 @@ class Server {
     }
     setupRoutes() {
         const { app } = this;
+        app.use(cors());
 
         app.use ((req, res, next) => {
             console.log('Inside First MidleWare');
