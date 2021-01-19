@@ -22,7 +22,6 @@ class UserController {
 
         try {
             const { email, password } = req.body;
-            console.log('req', req.body);
             const data = await userRepository.findOne({ email })            
             
                     if (data !== null) {

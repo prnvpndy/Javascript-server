@@ -31,7 +31,6 @@ export default class VersioningRepository<D extends mongoose.Document, M extends
 
       public getAll(query: any, projection: any, options: any): DocumentQuery<D[], D> {
             const finalQuery = { deletedAt: undefined, ...query };
-            console.log("query",finalQuery)
             return this.model.find(finalQuery, projection, options);
             }
 

@@ -9,7 +9,6 @@ import { permissions } from "../../libs/constant";
 export default (moduleName: string, permissionType: string) => (req: IRequest, res: Response, next: NextFunction) => {
     try {
 
-        console.log("::::::::::::INSIDE AUTHMIDDLEWARE::::::::::::");
         const token = req.headers['authorization'];
         const secret = config.secretKey;
         async function verifyUser() {
@@ -20,13 +19,11 @@ export default (moduleName: string, permissionType: string) => (req: IRequest, r
         verifyUser().then((result) => {
             if (result) {
                 const role = result.data.role;
-                console.log("role is ", role, result.data['email'])
                 const userRepository: UserRepository = new UserRepository();
                 userRepository.find({ email: result.data['email'], originalId: result.data['id'], deletedAt: null })
                     .then((result1) => {
                         if (!result1) {
 
-                            console.log("user does not exist ");
                             res.send({
                                 status: 404,
                                 message: "user does not exist",
@@ -35,7 +32,6 @@ export default (moduleName: string, permissionType: string) => (req: IRequest, r
                         }
                         else {
                             if (hasPermission(permissions.getUsers, role, permissionType)) {
-                                console.log(`${role} has permission ${permissionType} :true`);
                                 req.user = result.result;
                                 next(); 
                             }

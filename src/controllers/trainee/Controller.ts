@@ -16,7 +16,6 @@ class TraineeController {
       userRepository: UserRepository = new UserRepository();
 
       public get(req, res, next) {
-            console.log('inside')
             let { limit = 0, skip = 0, searchText } = req.query;
             skip = Number(skip);
             limit = Number(limit);
@@ -88,9 +87,7 @@ class TraineeController {
                 const id = req.query.id;
                 const userData = userRepository.findOne({ originalId: id })
                 userRepository.findOne({ originalId: id })
-                console.log(id, "  Value of ID")
                 const remover = id;
-                console.log(remover, " remover")
                 const user = new UserRepository();
                 user.delete(id, remover)
                     .then((result) => {

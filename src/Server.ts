@@ -47,12 +47,10 @@ class Server {
         app.use(cors());
 
         app.use ((req, res, next) => {
-            console.log('Inside First MidleWare');
             next();
         });
         app.use('/swagger', swaggerUI.serve, swaggerUI.setup(this.initSwagger()));
         app.use('/health-check', (req, res) => {
-            console.log('Inside Second MidleWare');
             res.send('I am fine');
         });
 
@@ -70,12 +68,10 @@ class Server {
 const {  port, nodeEnv, mongoUrl } = this.config;
         Database.open(mongoUrl)
         .then((res) => {
-            console.log('Successfully conected to Mongo');
             this.app.listen(port, (err) => {
                 if (err) {
                     console.log(err);
                 }
-                console.log(`App is running on port ${port}`);
             })
 
         })
