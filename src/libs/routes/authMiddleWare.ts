@@ -10,7 +10,6 @@ export default (moduleName: string, permissionType: string) => (req: IRequest, r
     try {
 
         const token = req.headers['authorization'];
-        console.log('receive token : ',token);
         const secret = config.secretKey;
         async function verifyUser() {
             const decodeUser = await jwt.verify(token, secret);
