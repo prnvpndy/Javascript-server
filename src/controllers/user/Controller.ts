@@ -16,6 +16,7 @@ class UserController {
     }
     me(req: any, res: Response, next: NextFunction) {
         const { user } = req;
+        console.log('res', req.user);
         return res.status(200).send({ message: 'Me', status: 'ok', data: user });
     }
     async login (req: Request, res: Response, next: NextFunction) {
@@ -23,18 +24,18 @@ class UserController {
         try {
             const { email, password } = req.body;
             const data = await userRepository.findOne({ email })            
-            
                     if (data !== null) {
                         const hasAccess = compareHashPassword(password, data.password)
                         if (hasAccess) {              
                             const token = jwt.sign({ data }, config.secretKey, {
-                              expiresIn: '15m'
+                              expiresIn: '50m'
                             });
                             res.send({
                                 data: token,
                                 message: 'Login successfully',
                                 status: 200
                             });
+                            console.log('login token : ', token);
                         }
                         else {
                             res.send({ 

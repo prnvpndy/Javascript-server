@@ -36,7 +36,8 @@ class TraineeController {
                               res.status(200).send({
                                     status: 'ok',
                                     message: 'Fetched Successfully',
-                                    Trainees: data
+                                    Trainees: data,
+                                    count: data.length
                               });
                         })
                         .catch((err) => {
@@ -82,22 +83,27 @@ class TraineeController {
       }
       
 
-      public delete = (req, res, next) => {
+      public delete = async (req, res, next) => {
             try {
                 const id = req.query.id;
                 const userData = userRepository.findOne({ originalId: id })
-                userRepository.findOne({ originalId: id })
                 const remover = id;
                 const user = new UserRepository();
-                user.delete(id, remover)
-                    .then((result) => {
+                userRepository.findOne({ originalId: id })
+                .then(async (re) =>{
+                  const result =  await  user.delete(String(id));
+                  if(result !==null) {
+                          console.log('jdd', result);
                         res.send({
                             status: 'OK',
-                            message: 'Deleted successfully', result,
+                            data: re,
+                            message: 'Deleted successfully',
                             code: 200,
-                            data: result
+                           
                         });
-                    })
+                    }
+
+                })
             }
             catch (err) {
                 res.send({

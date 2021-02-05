@@ -63,7 +63,7 @@ export default class VersioningRepository<D extends mongoose.Document, M extends
             const model = new this.model(newData);
             return model.save();
       }
-      public async delete(id: any, remover: any) {
+      public async delete(id: any) {
 
             let originalData;
 
@@ -79,7 +79,7 @@ export default class VersioningRepository<D extends mongoose.Document, M extends
                         const modelDelete = {
                               ...originalData,
                               deletedAt: Date.now(),
-                              deletedBy: remover,
+                              deletedBy: id,
                         };
 
                         this.model.updateOne({ _id: oldId }, modelDelete)

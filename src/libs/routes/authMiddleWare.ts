@@ -10,6 +10,7 @@ export default (moduleName: string, permissionType: string) => (req: IRequest, r
     try {
 
         const token = req.headers['authorization'];
+        console.log('receive token : ',token);
         const secret = config.secretKey;
         async function verifyUser() {
             const decodeUser = await jwt.verify(token, secret);
@@ -32,7 +33,8 @@ export default (moduleName: string, permissionType: string) => (req: IRequest, r
                         }
                         else {
                             if (hasPermission(permissions.getUsers, role, permissionType)) {
-                                req.user = result.result;
+                                console.log
+                                req.user = result;
                                 next(); 
                             }
                             else {
@@ -44,6 +46,7 @@ export default (moduleName: string, permissionType: string) => (req: IRequest, r
                             }
                         }
                     })
+                    
                     .catch((err) => { console.log(err) });
             }
             else {

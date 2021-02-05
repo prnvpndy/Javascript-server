@@ -242,6 +242,6 @@ traineeRouter.route('/')
  *         schema:
  *              $ref: '#/definitions/Unauthorized'
  */
-      .delete(authMiddleWare('getUser', 'read'), validationHandler(validation.delete), TraineeController.delete);
+      .delete(validationHandler(validation.delete), TraineeController.delete);
       
 export default traineeRouter;
