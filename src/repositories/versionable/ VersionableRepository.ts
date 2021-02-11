@@ -31,14 +31,13 @@ export default class VersioningRepository<D extends mongoose.Document, M extends
 
       public getAll(query: any, projection: any, options: any): DocumentQuery<D[], D> {
             const finalQuery = { deletedAt: undefined, ...query };
-            console.log("query",finalQuery)
             return this.model.find(finalQuery, projection, options);
             }
 
-      public findOne(query: any): mongoose.DocumentQuery<D, D> {
-            const finalQuery = { deleteAt: undefined, ...query };
-            return this.model.findOne(finalQuery);
-      }
+            public findOne(query: any): mongoose.DocumentQuery<D, D> {
+                  const finalQuery = { deleteAt: null, ...query };
+                  return this.model.findOne(finalQuery);
+              }
 
       public invalidate(id: any, prev: any): DocumentQuery<D, D> {
             const updateToData = {
@@ -64,7 +63,7 @@ export default class VersioningRepository<D extends mongoose.Document, M extends
             const model = new this.model(newData);
             return model.save();
       }
-      public async delete(id: any, remover: any) {
+      public async delete(id: any) {
 
             let originalData;
 
@@ -80,7 +79,7 @@ export default class VersioningRepository<D extends mongoose.Document, M extends
                         const modelDelete = {
                               ...originalData,
                               deletedAt: Date.now(),
-                              deletedBy: remover,
+                              deletedBy: id,
                         };
 
                         this.model.updateOne({ _id: oldId }, modelDelete)

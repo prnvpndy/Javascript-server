@@ -16,7 +16,6 @@ class TraineeController {
       userRepository: UserRepository = new UserRepository();
 
       public get(req, res, next) {
-
             let { limit = 0, skip = 0, searchText } = req.query;
             skip = Number(skip);
             limit = Number(limit);
@@ -37,7 +36,8 @@ class TraineeController {
                               res.status(200).send({
                                     status: 'ok',
                                     message: 'Fetched Successfully',
-                                    Trainees: data
+                                    Trainees: data,
+                                    count: data.length
                               });
                         })
                         .catch((err) => {
@@ -48,9 +48,6 @@ class TraineeController {
                         });
 
               
-            //  else {
-            //       trainee = this.userRepository.getAll('trainee', sort, {});
-            // }
       }
 
       public async create(req, res, next) {
@@ -85,28 +82,35 @@ class TraineeController {
                   });
       }
       
-      public delete(req, res, next) {
+
+      public delete = async (req, res, next) => {
             try {
-                  const id = req.params.id;
-                  const userData = userRepository.findOne({ originalId: id });
-                  userRepository.findOne({ originalId: id });
-                  const remover = '5fb363da080091a8c21d58b';
-                  userRepository.delete(id, remover)
-                        .then((result) => {
-                              res.send({
-                                    status: 'OK',
-                                    message: 'Deleted successfully', result,
-                                    code: 200,
-                                    data: result
-                              });
+                const id = req.query.id;
+                const userData = userRepository.findOne({ originalId: id })
+                const remover = id;
+                const user = new UserRepository();
+                userRepository.findOne({ originalId: id })
+                .then(async (re) =>{
+                  const result =  await  user.delete(String(id));
+                  if(result !==null) {
+                          console.log('jdd', result);
+                        res.send({
+                            status: 'OK',
+                            data: re,
+                            message: 'Deleted successfully',
+                            code: 200,
+                           
                         });
+                    }
+
+                })
             }
             catch (err) {
-                  res.send({
-                        message: 'User not found to be deleted',
-                        code: 404
-                  });
-            }
-      }
+                res.send({
+                    message: 'User not found to be deleted',
+                    code: 404
+                });
+            };
+        }
 }
 export default TraineeController.getInstance();

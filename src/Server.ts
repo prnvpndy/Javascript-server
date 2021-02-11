@@ -7,6 +7,7 @@ import { notFoundHandler, errorHandler } from './libs/routes';
 import notFoundRoute from './libs/routes/notFoundRoute';
 import Database from './libs/Database';
 import Iconfig from './config/IConfig';
+import * as cors from 'cors';
 
 import routes from './router';
 class Server {
@@ -43,14 +44,13 @@ class Server {
     }
     setupRoutes() {
         const { app } = this;
+        app.use(cors());
 
         app.use ((req, res, next) => {
-            console.log('Inside First MidleWare');
             next();
         });
         app.use('/swagger', swaggerUI.serve, swaggerUI.setup(this.initSwagger()));
         app.use('/health-check', (req, res) => {
-            console.log('Inside Second MidleWare');
             res.send('I am fine');
         });
 
@@ -68,12 +68,10 @@ class Server {
 const {  port, nodeEnv, mongoUrl } = this.config;
         Database.open(mongoUrl)
         .then((res) => {
-            console.log('Successfully conected to Mongo');
             this.app.listen(port, (err) => {
                 if (err) {
                     console.log(err);
                 }
-                console.log(`App is running on port ${port}`);
             })
 
         })

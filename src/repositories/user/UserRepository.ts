@@ -26,12 +26,14 @@ export default class UserRepository extends VersionableRepository<IUserModel, mo
         return super.update(id, data);
     }
 
-    public deleteData(id, remover) {
-        return super.delete(id, remover);
+    public deleteData(id) {
+        return super.delete(id);
     }
     public count() {
         return userModel.countDocuments();
     }
-  
+    public find(query, projection?: any, options?: any): any {
+        return userModel.find(query, projection, options)
+    }
 
 }
